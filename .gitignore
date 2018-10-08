@@ -5,8 +5,8 @@ bower_component
 src/config/configSec.js
 
 .DS_STORE
-node_modules
-dist
+node_modules/
+dist/
 *~
 *.pyc
 static
