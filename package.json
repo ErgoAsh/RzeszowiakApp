@@ -1,22 +1,22 @@
 {
-  "name": "electron-quick-start",
-  "version": "1.0.0",
+  "name": "rzeszowiak-app",
+  "version": "0.0.1",
   "description": "A minimal Electron application",
   "main": "main.js",
   "scripts": {
     "start": "electron ."
   },
-  "repository": "https://github.com/electron/electron-quick-start",
+  "repository": "https://bitbucket.org/ErgoAsh/rzeszowiakapp/",
   "keywords": [
-    "Electron",
-    "quick",
-    "start",
-    "tutorial",
-    "demo"
+    "rzeszowiak",
+    "browser"
   ],
-  "author": "GitHub",
-  "license": "CC0-1.0",
+  "author": "Tomasz K. & Marek K.",
+  "license": "MIT",
   "devDependencies": {
     "electron": "^2.0.0"
+  },
+  "dependencies": {
+    "react": "^16.5.2"
   }
 }
