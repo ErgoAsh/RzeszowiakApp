@@ -8,4 +8,32 @@
     overflow-x: hidden; /* Disable horizontal scroll */
     position: relative; /* Fixed Sidebar (stay in place on scroll) */
     float: right;
+    font-size: 30px;
+    
+}
+img {
+    width: 100px; /* You can set the dimensions to whatever you want */
+    height: 100px;
+    border-radius: 50%;
+}
+ul
+{
+    list-style-type: none;
+}
+.ItemImage
+{
+    border-bottom: 1px #b4b6ba solid;
+    height: 100%;
+
+}
+.ItemInfo
+{
+    border-bottom: 1px #b4b6ba solid;
+    height: 100%;
+}
+.ItemDescription
+{
+    border-bottom: 1px #b4b6ba solid; 
+    overflow: hidden;
+    height: 100%;
 }

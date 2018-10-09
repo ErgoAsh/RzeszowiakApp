@@ -17,7 +17,7 @@ const AuctionsMock = [
 class AuctionList extends Component {
     render() {
       return (
-        <div className="content col-xs-12">
+        <div className="content">
           <ul>
               {AuctionsMock.map(auction => <AuctionListItem key={auction.toString()} value={auction}/>)}
           </ul>
