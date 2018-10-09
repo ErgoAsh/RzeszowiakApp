@@ -7,7 +7,7 @@ import AuctionList from './AuctionList.js';
 class App extends Component {
   render() {
     return (
-      <div className="container">
+      <div className="app">
         <SideBar />
         <AuctionList/>
       </div>

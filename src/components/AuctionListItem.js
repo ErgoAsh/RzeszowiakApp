@@ -6,20 +6,19 @@ class AuctionListItem extends Component {
       return (
         <li>
             <div className="ItemImage">
-
-
+              <img src={this.props.value.image}/>
             </div>
             <div className="ItemInfo">
-
-                
+              <p>{this.props.value.title}</p>
+              <p>Cena: {this.props.value.prize}</p>             
             </div>
             <div className="ItemDescription">
-                <p>{this.props.value}</p>
+             {this.props.value.description}
                 
             </div>
         </li>
       );
-    }
-  }
+    }                               
+  }                                 
   
   export default AuctionListItem;

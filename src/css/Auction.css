@@ -1,0 +1,11 @@
+.content
+{
+    width: 80%;
+    height: 90%;
+    z-index: 1; /* Stay on top */
+    top: 0; /* Stay at the top */
+    left: 0;
+    overflow-x: hidden; /* Disable horizontal scroll */
+    position: relative; /* Fixed Sidebar (stay in place on scroll) */
+    float: right;
+}
