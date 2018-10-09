@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 class AuctionListItem extends Component {
     render() {
       return (
-        <div className="container">
+        <li>
             <div className="ItemImage">
 
 
@@ -14,10 +14,10 @@ class AuctionListItem extends Component {
                 
             </div>
             <div className="ItemDescription">
-                <p>Lorem</p>
+                <p>{this.props.value}</p>
                 
             </div>
-        </div>
+        </li>
       );
     }
   }
