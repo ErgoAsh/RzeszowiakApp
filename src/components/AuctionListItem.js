@@ -13,7 +13,7 @@ class AuctionListItem extends Component {
                 {this.props.value.title}
                 <p>Cena: {this.props.value.prize}</p>   
               </div>
-              <div className="ItemDescription col-md-6 align-text-top"><br />
+              <div className="ItemDescription col-md-6"><br />
                 <p> {this.props.value.description} </p>             
               </div>
           </li>
