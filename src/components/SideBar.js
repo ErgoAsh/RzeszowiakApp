@@ -23,11 +23,13 @@ class SideBar extends Component {
 
         <div className="container">
           <p className="col-md-12 text-md-left">Ogłoszenia z ostatnich</p>
-            <h3><input type="radio" name="date" className="checkbox-inline" /> 24 godzin</h3>
-            <h3><input type="radio" name="date" className="checkbox-inline"/> 3 Dni</h3>
-            <h3><input type="radio" name="date" className="checkbox-inline"/> 7 Dni</h3>
-            <h3><input type="radio" name="date" className="checkbox-inline"/> 14 Dni</h3>
-            <h3><input type="radio" name="date" className="checkbox-inline"/> 30 Dni</h3>
+            <div className="container">
+              <h3  className="col-xs-12"><input type="radio" name="date"/> 24 godzin</h3>
+              <h3 className="col-xs-12"><input type="radio" name="date"/> 3 Dni</h3>
+              <h3  className="col-xs-12"><input type="radio" name="date"/> 7 Dni</h3>
+              <h3  className="col-xs-12"><input type="radio" name="date"/> 14 Dni</h3>
+              <h3  className="col-xs-12"><input type="radio" name="date"/> 30 Dni</h3>
+            </div>
         </div>
 
       </div>

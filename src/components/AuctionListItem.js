@@ -6,6 +6,7 @@ class AuctionListItem extends Component {
       return (
         <div className="container-fluid">
           <li>
+             <div>
               <div className="ItemImage col-md-2">
                 <img alt="Yes" src="https://demos.creative-tim.com/paper-dashboard-pro/assets/img/faces/face-0.jpg"/*{this.props.value.image}*//>
               </div>
@@ -14,10 +15,11 @@ class AuctionListItem extends Component {
                 <p>Cena: {this.props.value.prize}</p>   
               </div>
               <div className="ItemDescription col-md-6"><br />
-                <p> {this.props.value.description} </p>             
+                <p> {this.props.value.description} </p>   
               </div>
+           </div>
           </li>
-        </div>
+       </div>
       );
     }                               
   }                                 
