@@ -1,7 +1,7 @@
 .content
 {
     width: 80%;
-    height: 90%;
+    height: 100%;
     z-index: 1; /* Stay on top */
     top: 0; /* Stay at the top */
     left: 0;
@@ -9,7 +9,7 @@
     position: relative; /* Fixed Sidebar (stay in place on scroll) */
     float: right;
     font-size: 30px;
-    
+    overflow: auto;
 }
 img {
     width: 100px; /* You can set the dimensions to whatever you want */
@@ -22,18 +22,21 @@ ul
 }
 .ItemImage
 {
-    border-bottom: 1px #b4b6ba solid;
     height: 100%;
 
 }
 .ItemInfo
 {
-    border-bottom: 1px #b4b6ba solid;
     height: 100%;
+    font-weight: bold;
 }
 .ItemDescription
 {
-    border-bottom: 1px #b4b6ba solid; 
     overflow: hidden;
     height: 100%;
+    font-size: 11px;
+}
+.container-fluid
+{
+    border-bottom: 1px #b4b6ba solid; 
 }

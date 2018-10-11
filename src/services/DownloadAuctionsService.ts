@@ -2,15 +2,14 @@ import "../models/Auction";
 
 class DownloadAuctionsService {
 
-    process(link: URL): Array<Auction> {
-        let array: Array<Auction> = new Array<Auction>();
-        this.downloadXML(link, (dat) => array = this.extractData(dat));
-        return array;
+    process(link: URL, onProcess: (resut: Auction[]) => void): void {
+        
+        this.downloadXML(link, (dat) => {
+            onProcess(this.extractData(dat));
+        });
     }
 
     downloadXML(link: URL, onDownload: (data: XMLDocument | null) => void): void {
-        let data: XMLDocument | null = null;
-
         if (link == null) {
             throw "Link is null";
         }
@@ -18,35 +17,37 @@ class DownloadAuctionsService {
         let xhttp: XMLHttpRequest = new XMLHttpRequest();
         xhttp.onreadystatechange = () => {
             if (xhttp.readyState === 4 && xhttp.status === 200) {
-               data = xhttp.responseXML;
-               onDownload(data);
+                //console.warn(xhttp.respon);
+                var parser = new DOMParser();
+                var xmlDoc = parser.parseFromString(xhttp.responseText, "application/xml");
+                onDownload(xmlDoc);
             }
         }
-        xhttp.open("GET", link.toString(), true);
+        xhttp.open("GET", link.href, true);
         xhttp.send();
     }
 
-    extractData(data: XMLDocument | null): Array<Auction> {
+    extractData(data: XMLDocument | null): Auction[] {
         if (data == null) throw "XMLDocument is null";
 
-        let items: Array<Auction> = new Array<Auction>();
+        let items: Auction[] = [];
         let auction: HTMLCollectionOf<Element> = data.getElementsByClassName("promobox");
 
         for (let i: number = 0; i < auction.length; i++) {
 
             let titleNode: Node | null = auction[i].getElementsByClassName("promobox-title-left")[0].firstChild;
-
+            
             items.push({
                 title : titleNode? titleNode.textContent : null,
-                link: new URL(""),
-                image: new ImageBitmap(),
+                link: null,
+                image: null,
                 date : new Date(),
                 category : "Cate",
                 prize : 1,
                 description : "Desc"
             });
         }
-
+        console.warn(items.length);
         return items;
     }
 }
