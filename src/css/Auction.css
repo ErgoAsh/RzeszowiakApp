@@ -39,5 +39,7 @@ ul
 }
 .container-fluid
 {
-    border-bottom: 1px #b4b6ba solid; 
+    border-bottom: 1px #b4b6ba solid;
+    padding-right: 0 !important;
+    padding-left: 0 !important;
 }

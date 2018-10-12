@@ -7,7 +7,7 @@
  /* The sidebar menu */
  .sidenav {
   height: 95%; /* Full-height: remove this if you want "auto" height */
-  width: 20% !important; /* Set the width of the sidebar */
+  width: 20%; /* Set the width of the sidebar */
   background-color: #224887; /* Rzeszowiak main color */
   padding-top: 20px;
   color: #FFFFFF !important;

@@ -23,7 +23,7 @@ class AuctionList extends React.Component {
 
   render() {
     return (
-      <div className="content">
+      <div className="content col-md-9">
         <ul>
             {this.state.arr.map(auction => <AuctionListItem key={auction.toString()} value={auction}/>)}
         </ul>
