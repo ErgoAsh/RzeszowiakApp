@@ -1,7 +1,7 @@
 .content
 {
     width: 80%;
-    height: 100%;
+    height: 95%;
     z-index: 1; /* Stay on top */
     top: 0; /* Stay at the top */
     left: 0;
@@ -12,18 +12,19 @@
     overflow: auto;
 }
 img {
-    width: 100px; /* You can set the dimensions to whatever you want */
-    height: 100px;
+    width: 100%; /* You can set the dimensions to whatever you want */
+    height: 100%;
     border-radius: 50%;
 }
 ul
 {
     list-style-type: none;
+    padding: 0 !important;
 }
 .ItemImage
 {
     height: 100%;
-
+    padding: 10px;
 }
 .ItemInfo
 {

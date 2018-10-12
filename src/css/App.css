@@ -2,22 +2,20 @@
 {
   height: 100%;
   width: 100%;
+  overflow: hidden;
 }
  /* The sidebar menu */
  .sidenav {
-  height: 100%; /* Full-height: remove this if you want "auto" height */
-  width: 20%; /* Set the width of the sidebar */
+  height: 95%; /* Full-height: remove this if you want "auto" height */
+  width: 20% !important; /* Set the width of the sidebar */
   background-color: #224887; /* Rzeszowiak main color */
   padding-top: 20px;
   color: #FFFFFF !important;
-  font-size: 30px;
+  font-size: 22px;
   padding-left: 10px;
   float: left;
 }
-.sidenav p
-{
-  margin-top: 20px;
-}
+
 
 
 /* Style page content */
