@@ -5,7 +5,7 @@ import '../css/App.css';
 class SideBar extends React.Component {
   render() {
     return (
-      <div className="sidenav container col-md-3">
+      <div className="sidenav col-md-3">
           <div className="container">
             <h1 className="col-md-12 text-md-center">Kategoria: !KOMPONENT! </h1>
           </div>

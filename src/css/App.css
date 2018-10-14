@@ -2,7 +2,7 @@
 {
   height: 100%;
   width: 100%;
-  overflow: hidden;
+  overflow: auto;
 }
  /* The sidebar menu */
  .sidenav {
@@ -13,16 +13,11 @@
   color: #FFFFFF !important;
   font-size: 22px;
   padding-left: 10px;
-  float: left;
 }
 
 
 
-/* Style page content */
-.main {
-  margin-left: 160px; /* Same as the width of the sidebar */
-  padding: 0px 10px;
-}
+
 
 input
 {

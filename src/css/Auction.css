@@ -7,14 +7,13 @@
     left: 0;
     overflow-x: hidden; /* Disable horizontal scroll */
     position: relative; /* Fixed Sidebar (stay in place on scroll) */
-    float: right;
     font-size: 30px;
     overflow: auto;
 }
 img {
     width: 100%; /* You can set the dimensions to whatever you want */
     height: 100%;
-    border-radius: 50%;
+    border-radius: 30%;
 }
 ul
 {
@@ -24,7 +23,7 @@ ul
 .ItemImage
 {
     height: 100%;
-    padding: 10px;
+    padding: 3px;
 }
 .ItemInfo
 {
