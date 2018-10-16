@@ -1,9 +1,13 @@
 const path = require('path');
 const webpack = require('webpack');
+
 //const ExtractTextPlugin = require('extract-text-webpack-plugin');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
+//var InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
 
 const SRC_DIR = path.resolve(__dirname, 'src');
 const DIST_DIR = path.resolve(__dirname, 'dist');
+const PUBLIC_DIR = path.resolve(__dirname, 'public');
 
 module.exports = {
     mode: "development",
@@ -20,20 +24,28 @@ module.exports = {
         colors: true,
         reasons: true,
         chunks: true
-      },
+    },
     plugins: [
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NamedModulesPlugin(),
+        new HtmlWebpackPlugin({
+            inject: true,
+            template: path.resolve('public/index.html'),
+          }),
+        //new InterpolateHtmlPlugin({
+        //    PUBLIC_URL: PUBLIC_DIR
+        //})
         //new ExtractTextPlugin({ filename: 'styles.css', allChunks: true })
     ],
     devServer: {
-        contentBase: DIST_DIR,
+        contentBase: [DIST_DIR, SRC_DIR, PUBLIC_DIR],
         port: 3000,
         compress: true,
         publicPath: '/',
         historyApiFallback: true,
         inline: true,
-        hot: true
+        hot: true,
+        overlay: true
     },
     module: {
         rules: [
