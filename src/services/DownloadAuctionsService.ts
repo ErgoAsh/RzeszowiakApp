@@ -24,6 +24,7 @@ class DownloadAuctionsService {
             }
         }
         xhttp.open("GET", link.href, true);
+        xhttp.overrideMimeType('text/xml; charset=iso-8859-2');
         xhttp.send();
     }
 

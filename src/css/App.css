@@ -8,7 +8,7 @@
  .sidenav {
   height: 95%; /* Full-height: remove this if you want "auto" height */
   width: 20%; /* Set the width of the sidebar */
-  background-color: #224887; /* Rzeszowiak main color */
+  background-color: #CCCCCC; /* Rzeszowiak main color */
   padding-top: 20px;
   color: #FFFFFF !important;
   font-size: 22px;
@@ -16,11 +16,63 @@
 }
 
 
-
-
-
 input
 {
   font-size: 13px;
   color: #000000;
+}
+
+h1 {
+  font-size: 60px;
+  margin: 0px;
+  padding: 0px;
+}
+
+h3 {
+  margin: 0px;
+  padding: 0px;
+  color: #CCCCCC;
+}
+
+div.wrap {
+  width: 500px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  vertical-align: middle;
+}
+
+div.wrap div {
+  position: relative;
+  margin: 50px 0;
+}
+
+label {
+  position: absolute;
+  top: 0;
+  font-size: 30px;
+  margin: 10px;
+  padding: 0 10px;
+  background-color: #CCCCCC;
+  -webkit-transition: top .2s ease-in-out,  font-size .2s ease-in-out;
+  transition: top .2s ease-in-out,  font-size .2s ease-in-out;
+}
+
+.active {
+  top: -25px;
+  font-size: 20px;
+}
+
+input[type=text] {
+  width: 100%;
+  padding: 20px;
+  border: 1px solid white;
+  font-size: 20px;
+  background-color: #CCCCCC;
+  color: white;
+}
+
+input[type=text]:focus {
+  outline: none;
 }

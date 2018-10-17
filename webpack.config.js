@@ -24,6 +24,10 @@ module.exports = {
     plugins: [
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NamedModulesPlugin(),
+        new webpack.ProvidePlugin({
+            $: 'jquery',
+            jQuery: 'jquery'
+        })
         //new ExtractTextPlugin({ filename: 'styles.css', allChunks: true })
     ],
     devServer: {
