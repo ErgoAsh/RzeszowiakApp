@@ -15,10 +15,7 @@ class AuctionListItem extends React.Component<AuctionItemProps, any> {
     return (
       <div className="container-fluid">
         <div>
-          <div className="ItemImage col-md-2">
-            <img alt="Yes" src="https://demos.creative-tim.com/paper-dashboard-pro/assets/img/faces/face-0.jpg"/*{this.props.value.image}*//>
-          </div>
-          <div className="ItemInfo col-md-4">
+          <div className="ItemInfo col-md-6">
             {this.props.value.title}
             <p>Cena: {this.props.value.prize}</p>   
           </div>

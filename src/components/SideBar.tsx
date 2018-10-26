@@ -7,28 +7,49 @@ class SideBar extends React.Component {
     return (
       <div className="sidenav col-md-3">
           <div className="container">
-            <h1 className="col-md-12 text-md-center">Kategoria: !KOMPONENT! </h1>
+
+            <h1 className="col-md-12 text-md-center">Kategoria </h1>
+
+             <div className="row col-md-12">
+              <div className="btn-group-lg text-center pagination-centered">
+                <button type="button" className="btn btn-warning">Mieszkania</button>
+                <button type="button" className="btn btn-warning">Domy</button>
+                <button type="button" className="btn btn-warning">Działki</button>
+                <button type="button" className="btn btn-warning">Lokale,garaże</button>
+              </div>
+            </div>
           </div>
 
         <div className="container">
-          <p className="col-md-12 text-md-center">Cena</p>
-          od <input type="text" name="from" className="input-sm col-md-12" /><br />
-          do <input type="text" name="to" className="input-sm col-md-12" />
+           
+          <fieldset className="float-label">
+          <input name="od" type="text" className="form-control" required />
+          <label htmlFor="od">Od</label>
+          </fieldset>
+
+            <fieldset className="float-label">
+          <input name="do" type="text" className="form-control" required />
+          <label htmlFor="do">Do</label>
+          </fieldset>
+          
         </div>
 
         <div className="container">
-          <p>Szukana fraza</p>
-          <input type="text" name="keywords" className="input-sm col-md-12" />
+
+          <fieldset className="float-label">
+          <input name="phrase" type="text" className="form-control" required />
+          <label htmlFor="phraze">Fraza</label>
+          </fieldset>
         </div>
 
         <div className="container">
           <p className="col-md-12 text-md-left">Ogłoszenia z ostatnich</p>
             <div className="container">
-              <h3><input type="radio" name="date"/> 24 godzin</h3>
-              <h3><input type="radio" name="date"/> 3 Dni</h3>
-              <h3><input type="radio" name="date"/> 7 Dni</h3>
-              <h3><input type="radio" name="date"/> 14 Dni</h3>
-              <h3><input type="radio" name="date"/> 30 Dni</h3>
+
+
+
+
+
             </div>
         </div>
       </div>
