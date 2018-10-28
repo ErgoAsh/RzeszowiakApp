@@ -2,8 +2,11 @@
 .navbar-fixed-bottom
 {
     height: 5%;
+    color: #f0ad4e;
+    font-weight: bold;
 }
 .navbar
 {
     position: inherit !important;
+    background: #4c4c4c;
 }
