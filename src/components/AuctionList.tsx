@@ -1,10 +1,9 @@
 import * as React from 'react';
 
 import { resolve } from "inversify-react";
-import { IDownloadService } from 'src/services/IDownloadService';
 
+import IDownloadService from '../services/IDownloadService';
 import AuctionListItem from './AuctionListItem';
-import DownloadAuctionsService from "../services/DownloadAuctionsService";
 
 import "../css/Auction.css";
 

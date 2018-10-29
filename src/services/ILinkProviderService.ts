@@ -1,6 +1,6 @@
-export interface ILinkProviderService {
+export default interface ILinkProviderService {
 
-    getLink(searchQuery: string | null, category: SearchCategory, page: number, minPrize: number, maxPrize: number, time: TimeQuery, sortBy: SortStyle): URL;
+    getLink(searchQuery: string | null, category: SearchCategory, page: number, minPrize: number | null, maxPrize: number | null, time: TimeQuery, sortBy: SortStyle): URL;
 
 }
 

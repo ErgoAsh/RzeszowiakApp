@@ -2,7 +2,7 @@ import { ILinkProviderService, TimeQuery, SortStyle, SearchCategory } from "./IL
 
 export class LinkProviderService implements ILinkProviderService {
 
-    getLink(searchQuery: string | null, category: SearchCategory, page: number, minPrize: number, maxPrize: number, time: TimeQuery, sortBy: SortStyle): URL {
+    getLink(searchQuery: string | null, category: SearchCategory, page: number, minPrize: number | null, maxPrize: number | null, time: TimeQuery, sortBy: SortStyle): URL {
 
         let base = "http://http://www.rzeszowiak.pl/Nieruchomosci-Sprzedam-307001"; //Last 3 numbers are pages
 
@@ -10,15 +10,11 @@ export class LinkProviderService implements ILinkProviderService {
 
         base += sortBy.valueOf() + 1; //Sorting style
         base += "10" //Amount of results per page
+        base += time.valueOf() + 1; //Time constraint
 
-
-        //Sortowanie
-        //Ilość na stronę - 2
-        //Data wyszukiwania - 1
-
-        //?r= Kategoria
-        //&min=
-        //&max=
+        base += "?r=" + category.toString().toLowerCase();
+        if (minPrize != null) base += "&min=" + minPrize;
+        if (maxPrize != null) base += "&max=" + maxPrize;
 
         return new URL(base);
     }

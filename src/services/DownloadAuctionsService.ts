@@ -1,6 +1,7 @@
 import "../models/Auction";
+import  IDownloadService from "./IDownloadService";
 
-class DownloadAuctionsService {
+export class DownloadAuctionsService implements IDownloadService {
 
     process(link: URL, onProcess: (resut: Auction[]) => void): void {
         
