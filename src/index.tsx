@@ -1,13 +1,19 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 //import * as registerServiceWorker from './registerServiceWorker';
-import App from './components/App';
 
 import './css/index.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-console.warn("Debug warn in index.tsx");
+import App from './components/App';
+import { Provider } from "inversify-react";
+import { Container } from "inversify";
 
-ReactDOM.render(<App />, document.getElementById("root"));
+import DownloadAuctionsService from "./services/DownloadAuctionsService";
+import LinkProviderService from "./services/LinkProviderService";
 
-//registerServiceWorker();
+const container = new Container();
+container.bind("linkService").to(LinkProviderService);
+container.bind("downloadService").to(DownloadAuctionsService);
+
+ReactDOM.render(<Provider container={container}><App /></Provider>, document.getElementById("root"));

@@ -2,20 +2,25 @@ import * as React from 'react';
 
 import { resolve } from "inversify-react";
 
-import IDownloadService from '../services/IDownloadService';
+import LinkProviderService, { SearchCategory, TimeQuery, SortStyle } from '../services/LinkProviderService';
+import DownloadAuctionsService from '../services/DownloadAuctionsService';
 import AuctionListItem from './AuctionListItem';
+import Auction from '../models/Auction';
 
 import "../css/Auction.css";
 
 class AuctionList extends React.Component {
 
-  @resolve("nameProvider")
-  private readonly downloadService: IDownloadService;
+  @resolve("downloadService")
+  private readonly downloadService: DownloadAuctionsService;
+
+  @resolve("linkService")
+  private readonly linkService: LinkProviderService;
 
   constructor(props: any) {
     super(props);
 
-    this.downloadService.process(new URL("http://www.rzeszowiak.pl/Nieruchomosci-Sprzedam-3070011155?r=mieszkania"), (result) => {
+    this.downloadService.process(this.linkService.getLink(null, SearchCategory.Domy, 1, null, null, TimeQuery.Days_30, SortStyle.Prize_DESC), (result) => {
       this.state.arr = result;
       console.warn(result.length);
       this.forceUpdate();

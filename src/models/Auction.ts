@@ -1,4 +1,4 @@
-class Auction {
+export default class Auction {
 
     title : string | null;
     link : URL | null;

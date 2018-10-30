@@ -1,7 +1,8 @@
-import "../models/Auction";
-import  IDownloadService from "./IDownloadService";
+import { injectable } from "inversify";
+import Auction from "../models/Auction";
 
-export class DownloadAuctionsService implements IDownloadService {
+@injectable()
+class DownloadAuctionsService {
 
     process(link: URL, onProcess: (resut: Auction[]) => void): void {
         
