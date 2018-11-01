@@ -1,7 +1,8 @@
-import { injectable } from "inversify";
 import Auction from "../models/Auction";
+import { Singleton, AutoWired } from 'typescript-ioc';
 
-@injectable()
+@Singleton 
+@AutoWired 
 class DownloadAuctionsService {
 
     process(link: URL, onProcess: (resut: Auction[]) => void): void {

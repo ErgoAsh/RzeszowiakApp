@@ -1,12 +1,16 @@
-import { injectable } from "inversify";
 import "reflect-metadata";
+import { Singleton, AutoWired } from 'typescript-ioc';
 
-@injectable()
+@Singleton 
+@AutoWired 
 class LinkProviderService {
+
+    //@Inject("baseLink")
+    //private readonly _baseLink: string;
 
     getLink(searchQuery: string | null, category: SearchCategory, page: number, minPrize: number | null, maxPrize: number | null, time: TimeQuery, sortBy: SortStyle): URL {
 
-        let base = "http://http://www.rzeszowiak.pl/Nieruchomosci-Sprzedam-307"; //Last 3 numbers are pages
+        let base = "http://www.rzeszowiak.pl/Nieruchomosci-Sprzedam-307"; //Last 3 numbers are pages
 
         base += page.toLocaleString('en-US', {minimumIntegerDigits: 3, useGrouping: false}); //3 next numbers has to be in "001" format
 

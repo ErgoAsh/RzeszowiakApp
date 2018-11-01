@@ -1,20 +1,19 @@
 import * as React from 'react';
 
-import { resolve } from "inversify-react";
-
 import LinkProviderService, { SearchCategory, TimeQuery, SortStyle } from '../services/LinkProviderService';
 import DownloadAuctionsService from '../services/DownloadAuctionsService';
 import AuctionListItem from './AuctionListItem';
 import Auction from '../models/Auction';
+import { Inject } from 'typescript-ioc';
 
 import "../css/Auction.css";
 
 class AuctionList extends React.Component {
 
-  @resolve("downloadService")
+  @Inject
   private readonly downloadService: DownloadAuctionsService;
 
-  @resolve("linkService")
+  @Inject
   private readonly linkService: LinkProviderService;
 
   constructor(props: any) {
