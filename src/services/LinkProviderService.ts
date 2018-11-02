@@ -5,9 +5,6 @@ import { Singleton, AutoWired } from 'typescript-ioc';
 @AutoWired 
 class LinkProviderService {
 
-    //@Inject("baseLink")
-    //private readonly _baseLink: string;
-
     getLink(searchQuery: string | null, category: SearchCategory, page: number, minPrize: number | null, maxPrize: number | null, time: TimeQuery, sortBy: SortStyle): URL {
 
         let base = "http://www.rzeszowiak.pl/Nieruchomosci-Sprzedam-307"; //Last 3 numbers are pages
@@ -26,6 +23,25 @@ class LinkProviderService {
         return new URL(base);
     }
 
+    getLinkByOptions(searchOptions: SearchOptions): URL {
+        return this.getLink(searchOptions.searchQuery, 
+            searchOptions.category, 
+            searchOptions.page, 
+            searchOptions.minPrize, 
+            searchOptions.maxPrize, 
+            searchOptions.time, 
+            searchOptions.sortBy);
+    }
+}
+
+export class SearchOptions {
+    searchQuery: string | null;
+    category: SearchCategory;
+    page: number;
+    minPrize: number | null;
+    maxPrize: number | null; 
+    time: TimeQuery;
+    sortBy: SortStyle;
 }
 
 export enum SearchCategory {

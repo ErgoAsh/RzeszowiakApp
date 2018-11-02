@@ -9,7 +9,6 @@ interface AuctionItemProps
 class AuctionListItem extends React.Component<AuctionItemProps, any> {
   constructor(props: AuctionItemProps) {
     super(props);
-    console.warn("Should Warn!!");
   }
 
   render() {
