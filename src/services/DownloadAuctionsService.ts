@@ -38,14 +38,20 @@ class DownloadAuctionsService {
         let items: Auction[] = [];
         let auction: HTMLCollectionOf<Element> = data.getElementsByClassName("promobox");
 
+        //TODO find in normalbox
+        //TODO find in promobox
+
         for (let i: number = 0; i < auction.length; i++) {
 
-            let titleNode: Node | null = auction[i].getElementsByClassName("promobox-title-left")[0].firstChild;
-            
+            let titleNode: Element | null = auction[i].getElementsByClassName("promobox-title-left")[0].firstElementChild;
+            let link: string | null = titleNode? "http://rzeszowiak.pl" + titleNode.getAttribute("href") : null;
+
+            console.log(link);
+
             items.push({
                 title : titleNode? titleNode.textContent : null,
-                link: null,
-                image: null,
+                link: link? new URL(link) : null,
+                image: null, //TODO?
                 date : new Date(),
                 category : "Cate",
                 prize : 1,

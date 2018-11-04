@@ -4,7 +4,6 @@ export default class Auction {
     link : URL | null;
     image : ImageBitmap | null;
     date : Date;
-    category : string;
     prize : number;
     description : string;
 }

@@ -27,7 +27,7 @@ class AuctionList extends React.Component {
 
     this.setupNewSearchOptions({
       searchQuery: null, 
-      category: SearchCategory.Domy, 
+      category: SearchCategory.Mieszkania, 
       page: 1, 
       minPrize: null, 
       maxPrize: null, 
@@ -36,7 +36,12 @@ class AuctionList extends React.Component {
       sortBy: SortStyle.Prize_DESC
     }, true);
 
-    this.configService.subscribe(this.setupNewSearchOptions);
+    this.configService.subscribe((auctions: Auction[], refresh: boolean) => {
+      if (refresh)
+        this.setState({arr: auctions});
+      else 
+        this.setState({arr: this.state.arr.concat(auctions), counter: 0});
+    });
   }
 
   setupNewSearchOptions(searchOptions: SearchOptions, refresh: boolean): void {
@@ -44,7 +49,7 @@ class AuctionList extends React.Component {
       if (refresh)
         this.setState({arr: result});
       else 
-        this.setState({arr: this.state.arr.concat(result)});
+        this.setState({arr: this.state.arr.concat(result), counter: 0});
     });
   }
 

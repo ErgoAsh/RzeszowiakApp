@@ -7,13 +7,19 @@ interface AuctionItemProps
 } 
 
 class AuctionListItem extends React.Component<AuctionItemProps, any> {
+
+  onClick() {
+    if (this.props.value.link != null)
+      open(this.props.value.link.toString());
+  }
+
   constructor(props: AuctionItemProps) {
     super(props);
   }
 
   render() {
     return (
-      <div className="container-fluid">
+      <div onClick={() => this.onClick()} className="container-fluid">
         <div>
           <div className="ItemInfo col-md-6">
             {this.props.value.title}

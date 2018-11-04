@@ -15,9 +15,9 @@ class LinkProviderService {
         base += "10" //Amount of results per page
         base += time.valueOf() + 1; //Time constraint
 
-        base += "?r=" + category.toString().toLowerCase();
-        if (minPrize != null) base += "&min=" + minPrize;
-        if (maxPrize != null) base += "&max=" + maxPrize;
+        base += "?r=" + category.valueOf();
+        if (minPrize != null && minPrize != 0) base += "&min=" + minPrize;
+        if (maxPrize != null && minPrize != 0) base += "&max=" + maxPrize;
 
         console.log(base);
         return new URL(base);
@@ -45,10 +45,10 @@ export class SearchOptions {
 }
 
 export enum SearchCategory {
-    Mieszkania,
-    Domy, 
-    Dzialki,
-    Lokale
+    Mieszkania = "mieszkania",
+    Domy = "domy", 
+    Dzialki = "dzialki",
+    Lokale = "lokale"
 }
 
 export enum TimeQuery {
