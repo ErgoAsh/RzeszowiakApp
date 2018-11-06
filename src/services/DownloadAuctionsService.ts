@@ -53,7 +53,6 @@ class DownloadAuctionsService {
                 link: link? new URL(link) : null,
                 image: null, //TODO?
                 date : new Date(),
-                category : "Cate",
                 prize : 1,
                 description : "Desc"
             });

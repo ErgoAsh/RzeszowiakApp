@@ -102,12 +102,12 @@ class SideBar extends React.Component {
         <div className="container">
            
           <fieldset className="float-label">
-            <input onChange={(e) => this.handleMinPrizeChange(e)} value={this.state.min} name="od" type="text" className="form-control" required />
+            <input onChange={(e) => this.handleMinPrizeChange(e)} value={this.state.min} placeholder="" name="od" type="text" className="form-control" required />
             <label htmlFor="od">Od</label>
           </fieldset>
 
           <fieldset className="float-label">
-            <input onChange={(e) => this.handleMaxPrizeChange(e)} value={this.state.max} name="do" type="text" className="form-control" required />
+            <input onChange={(e) => this.handleMaxPrizeChange(e)} value={this.state.max} placeholder="" name="do" type="text" className="form-control" required />
             <label htmlFor="do">Do</label>
           </fieldset>
           

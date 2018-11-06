@@ -33,12 +33,15 @@
     "react-bootstrap": "^0.32.4",
     "react-dev-utils": "^6.0.5",
     "react-dom": "^16.5.2",
+    "react-redux": "^5.1.0",
+    "redux": "^4.0.1",
     "reflect-metadata": "^0.1.12",
     "style-loader": "^0.23.1",
     "ts-loader": "^5.2.1",
     "typescript": "^3.1.2",
     "typescript-ioc": "^1.2.4",
-    "webpack": "^4.20.2"
+    "webpack": "^4.20.2",
+    "xpath": "0.0.27"
   },
   "scripts": {
     "electron": "electron .",
