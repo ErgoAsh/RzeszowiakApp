@@ -1,5 +1,5 @@
-import Auction from "../models/Auction";
 import { Singleton, AutoWired } from 'typescript-ioc';
+import Auction from "../models/Auction";
 
 @Singleton 
 @AutoWired 
@@ -20,7 +20,6 @@ class DownloadAuctionsService {
         let xhttp: XMLHttpRequest = new XMLHttpRequest();
         xhttp.onreadystatechange = () => {
             if (xhttp.readyState === 4 && xhttp.status === 200) {
-                //console.warn(xhttp.respon);
                 var parser = new DOMParser();
                 var xmlDoc = parser.parseFromString(xhttp.responseText, "application/xml");
                 onDownload(xmlDoc);
@@ -36,28 +35,33 @@ class DownloadAuctionsService {
         if (data == null) throw "XMLDocument is null";
 
         let items: Auction[] = [];
-        let auction: HTMLCollectionOf<Element> = data.getElementsByClassName("promobox");
 
         //TODO find in normalbox
         //TODO find in promobox
 
-        for (let i: number = 0; i < auction.length; i++) {
+        let auctions = data.evaluate("//div[contains(@class, 'prmobox')] | //div[contains(@class, 'normalbox')]", data, null, XPathResult.ORDERED_NODE_ITERATOR_TYPE, null);
+        try {        
+            let item = auctions.iterateNext();
+            while (item) {
+                console.log("OK");
+                let title = data.evaluate("./promobox-title-left/a/@href | ./normalbox-title-left/a/@href", item, null, XPathResult.STRING_TYPE, null);
+                let link = data.evaluate("./promobox-title-left/a::text() | ./normalbox-title-left/a::text()", item, null, XPathResult.STRING_TYPE, null);
 
-            let titleNode: Element | null = auction[i].getElementsByClassName("promobox-title-left")[0].firstElementChild;
-            let link: string | null = titleNode? "http://rzeszowiak.pl" + titleNode.getAttribute("href") : null;
-
-            console.log(link);
-
-            items.push({
-                title : titleNode? titleNode.textContent : null,
-                link: link? new URL(link) : null,
-                image: null, //TODO?
-                date : new Date(),
-                prize : 1,
-                description : "Desc"
-            });
+                items.push({
+                    title : title.stringValue,
+                    link: new URL(link.stringValue),
+                    image: null, //TODO?
+                    date : new Date(),
+                    prize : 1,
+                    description : "Desc"
+                });
+            }
+        } catch (e) {
+            console.log(e);
         }
-        console.warn(items.length);
+        
+        console.log(items.length);
+       
         return items;
     }
 }

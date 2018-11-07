@@ -1,17 +1,24 @@
-import { createStore } from "redux";
-import RootReducer from "./RootReducer";
+//import { createStore, combineReducers } from "redux";
+//import { reducer } from "./RootReducer";
 import Auction from "../models/Auction";
 
 export interface State {
     auctions: Auction[]
 }
 
-export enum ActionTypes {
-    ADD_AUCTION = "ADD_AUCTION",
-    RESET_AUCTIONS = "RESET_AUCTIONS",
-
+export const initialState: State = {
+    auctions: []
 }
 
-const store = createStore(RootReducer);
+export enum ActionTypes {
+    ADD_AUCTION = "ADD_AUCTION",
+    RESET_AUCTIONS = "RESET_AUCTIONS"
+}
+/*
+export const reduce = combineReducers<State>({
+    
+});
 
+const store = createStore(reduce, initialState);
 export default store;
+*/
