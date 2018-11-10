@@ -1,5 +1,6 @@
 import { Singleton, AutoWired } from 'typescript-ioc';
-import Auction from "../models/Auction";
+import Auction from '../models/Auction';
+import * as $ from "jquery";
 
 @Singleton 
 @AutoWired 
@@ -12,55 +13,46 @@ class DownloadAuctionsService {
         });
     }
 
-    downloadXML(link: URL, onDownload: (data: XMLDocument | null) => void): void {
+    downloadXML(link: URL, onDownload: (data: JQuery.Node[] | null) => void): void {
         if (link == null) {
             throw "Link is null";
         }
-
-        let xhttp: XMLHttpRequest = new XMLHttpRequest();
-        xhttp.onreadystatechange = () => {
-            if (xhttp.readyState === 4 && xhttp.status === 200) {
-                var parser = new DOMParser();
-                var xmlDoc = parser.parseFromString(xhttp.responseText, "application/xml");
-                onDownload(xmlDoc);
+        
+        $.ajax({
+            url: link.href,
+            method: "GET",
+            contentType: "text/html; charset=iso-8859-2",
+            crossDomain: true,
+            error: () => console.log("HTML file has been incorrectly downloaded!"),
+            success: (result) => {
+                onDownload($.parseHTML(result, null, false))
             }
-        }
-        xhttp.open("GET", link.href, true);
-        xhttp.overrideMimeType('text/xml; charset=iso-8859-2');
-        xhttp.setRequestHeader('Access-Control-Allow-Origin','http://www.rzeszowiak.pl/');
-        xhttp.send();
+        });
     }
 
-    extractData(data: XMLDocument | null): Auction[] {
-        if (data == null) throw "XMLDocument is null";
+    extractData(data: JQuery.Node[] | null): Auction[] {
+        if (data == null || data.length == 0) throw "XMLDocument is null";
 
         let items: Auction[] = [];
 
-        //TODO find in normalbox
-        //TODO find in promobox
+        $(data).find("div.promobox,div.normalbox").each(function() {
+            let title = $(this).find("div.promobox-title-left,div.normalbox-title-left a");
+            let date = $(this).find("p.promobox-more,p.normalbox-more span b").text();
+            let prize = $(this).find("div.promobox-title-left2,div.normalbox-title-left2 b").text();
+            let image = $(this).find("div.promobox-body-left,div.normalbox-body-left a img");
+            let desc = $(this).find("div.promobox-body-right,div.normalbox-body-right").text();
 
-        let auctions = data.evaluate("//div[contains(@class, 'prmobox')] | //div[contains(@class, 'normalbox')]", data, null, XPathResult.ORDERED_NODE_ITERATOR_TYPE, null);
-        try {        
-            let item = auctions.iterateNext();
-            while (item) {
-                console.log("OK");
-                let title = data.evaluate("./promobox-title-left/a/@href | ./normalbox-title-left/a/@href", item, null, XPathResult.STRING_TYPE, null);
-                let link = data.evaluate("./promobox-title-left/a::text() | ./normalbox-title-left/a::text()", item, null, XPathResult.STRING_TYPE, null);
+            console.log(image? "http://rzeszowiak.pl" + image.attr("src") : "");
 
-                items.push({
-                    title : title.stringValue,
-                    link: new URL(link.stringValue),
-                    image: null, //TODO?
-                    date : new Date(),
-                    prize : 1,
-                    description : "Desc"
-                });
-            }
-        } catch (e) {
-            console.log(e);
-        }
-        
-        console.log(items.length);
+            items.push({
+                title: title.text().substr(3),
+                link: title? new URL("http://rzeszowiak.pl" + title.attr("href")) : null,
+                image_src: image? "http://rzeszowiak.pl" + image.attr("src") : "",
+                date : date,
+                prize : prize? Number(prize.split(' ')[1]) : 0,
+                description : desc
+            });
+        });
        
         return items;
     }

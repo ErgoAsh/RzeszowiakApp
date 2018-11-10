@@ -12,7 +12,7 @@ class LinkProviderService {
         base += page.toLocaleString('en-US', {minimumIntegerDigits: 3, useGrouping: false}); //3 next numbers has to be in "001" format
 
         base += sortBy.valueOf() + 1; //Sorting style
-        base += "10" //Amount of results per page
+        base += "09" //Amount of results per page
         base += time.valueOf() + 1; //Time constraint
 
         base += "?r=" + category.valueOf();

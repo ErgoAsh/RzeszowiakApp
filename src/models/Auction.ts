@@ -1,9 +1,9 @@
 export default class Auction {
 
-    title : string | null;
+    title : string;
     link : URL | null;
-    image : ImageBitmap | null;
-    date : Date;
+    image_src : string;
+    date : string;
     prize : number;
     description : string;
 }
