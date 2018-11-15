@@ -1,8 +1,5 @@
-import "reflect-metadata";
-import { Singleton, AutoWired } from 'typescript-ioc';
+import { observable } from "mobx";
 
-@Singleton 
-@AutoWired 
 class LinkProviderService {
 
     getLink(searchQuery: string | null, category: SearchCategory, page: number, minPrize: number | null, maxPrize: number | null, time: TimeQuery, sortBy: SortStyle): URL {
@@ -12,7 +9,7 @@ class LinkProviderService {
         base += page.toLocaleString('en-US', {minimumIntegerDigits: 3, useGrouping: false}); //3 next numbers has to be in "001" format
 
         base += sortBy.valueOf() + 1; //Sorting style
-        base += "09" //Amount of results per page
+        base += "10" //Amount of results per page
         base += time.valueOf() + 1; //Time constraint
 
         base += "?r=" + category.valueOf();
@@ -35,13 +32,13 @@ class LinkProviderService {
 }
 
 export class SearchOptions {
-    searchQuery: string | null;
-    category: SearchCategory;
-    page: number;
-    minPrize: number | null;
-    maxPrize: number | null; 
-    time: TimeQuery;
-    sortBy: SortStyle;
+    @observable searchQuery: string | null;
+    @observable category: SearchCategory;
+    @observable page: number;
+    @observable minPrize: number | null;
+    @observable maxPrize: number | null; 
+    @observable time: TimeQuery;
+    @observable sortBy: SortStyle;
 }
 
 export enum SearchCategory {

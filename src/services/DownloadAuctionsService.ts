@@ -1,15 +1,14 @@
-import { Singleton, AutoWired } from 'typescript-ioc';
 import Auction from '../models/Auction';
 import * as $ from "jquery";
 
-@Singleton 
-@AutoWired 
 class DownloadAuctionsService {
 
-    process(link: URL, onProcess: (resut: Auction[]) => void): void {
+    process(link: URL, onProcess: (result: Auction[], hasNextPage: boolean) => void): void {
         
-        this.downloadXML(link, (dat) => {
-            onProcess(this.extractData(dat));
+        this.downloadXML(link, (data) => {
+            if (data == null || data.length == 0) throw "XMLDocument is null";
+
+            onProcess(this.extractData(data), this.hasNextPage(data));
         });
     }
 
@@ -21,18 +20,18 @@ class DownloadAuctionsService {
         $.ajax({
             url: link.href,
             method: "GET",
-            contentType: "text/html; charset=iso-8859-2",
             crossDomain: true,
+            contentType: 'Content-type: text/plain; charset=iso-8859-2',
             error: () => console.log("HTML file has been incorrectly downloaded!"),
+            beforeSend: (request) =>
+                request.overrideMimeType('text/html;charset=iso-8859-2'),
             success: (result) => {
                 onDownload($.parseHTML(result, null, false))
             }
         });
     }
 
-    extractData(data: JQuery.Node[] | null): Auction[] {
-        if (data == null || data.length == 0) throw "XMLDocument is null";
-
+    extractData(data: JQuery.Node[]): Auction[] {
         let items: Auction[] = [];
 
         $(data).find("div.promobox,div.normalbox").each(function() {
@@ -42,10 +41,8 @@ class DownloadAuctionsService {
             let image = $(this).find("div.promobox-body-left,div.normalbox-body-left a img");
             let desc = $(this).find("div.promobox-body-right,div.normalbox-body-right").text();
 
-            console.log(image? "http://rzeszowiak.pl" + image.attr("src") : "");
-
             items.push({
-                title: title.text().substr(3),
+                title: title.text(),
                 link: title? new URL("http://rzeszowiak.pl" + title.attr("href")) : null,
                 image_src: image? "http://rzeszowiak.pl" + image.attr("src") : "",
                 date : date,
@@ -55,6 +52,10 @@ class DownloadAuctionsService {
         });
        
         return items;
+    }
+
+    hasNextPage(data: JQuery.Node[]): boolean {
+        return $(data).find("div.oDnno span").last().hasClass("oDnnsk");
     }
 }
 

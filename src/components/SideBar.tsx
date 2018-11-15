@@ -1,79 +1,48 @@
 import * as React from 'react';
-import ConfigEventDisptcherService from '../services/ConfigEventDispatcherService';
-import { SearchOptions, SearchCategory, TimeQuery, SortStyle } from '../services/LinkProviderService';
-import { observer } from 'mobx-react';
-import { action, observable } from 'mobx';
-import { Inject } from 'typescript-ioc';
+import { SearchCategory, SearchOptions } from '../services/LinkProviderService';
+import { observer, inject } from 'mobx-react';
 import '../css/App.css';
 
+@inject("auctionConfigStore")
 @observer
-class SideBar extends React.Component {
+class SideBar extends React.Component<any, any> {
 
-  @Inject
-  private readonly configService: ConfigEventDisptcherService
-
-  @observable
-  private options: SearchOptions;
-
-  constructor(props: any) {
-    super(props);
-
-    this.options = {
-      searchQuery: null, 
-      category: SearchCategory.Domy, 
-      page: 1, 
-      minPrize: null, 
-      maxPrize: null, 
-      time: TimeQuery.Days_30, 
-      sortBy: SortStyle.Prize_DESC
-    };
-
-    //TODO test
-    //this.handleClick = this.handleClick.bind(this);
-  }
-
-  @action
   resetPage() {
-    this.options.page = 1;
+    this.props.auctionConfigStore.options.page = 1;
     this.sendNewSearchOption();
   }
 
-  @action
   setCategory(input: SearchCategory) {
-    this.options.category = input;
+    this.props.auctionConfigStore.update((old: SearchOptions) => {old.category = input; return old;});
     this.resetPage();
   }
 
-  @action
   handleQueryUpdate(e: React.ChangeEvent<HTMLInputElement>) {
     this.setState({query: e.currentTarget.value});
-    this.options.searchQuery = e.currentTarget.value;
+    this.props.auctionConfigStore.options.searchQuery = e.currentTarget.value;
     this.resetPage();
   }
 
-  @action
   handleMinPrizeChange(e: React.ChangeEvent<HTMLInputElement>) {
     let result = parseInt(e.currentTarget.value);
     if (!isNaN(result)) {
       this.setState({min: result});
-      this.options.minPrize = result;
+      this.props.auctionConfigStore.options.minPrize = result;
     }
     this.resetPage();
   }
 
-  @action
   handleMaxPrizeChange(e: React.ChangeEvent<HTMLInputElement>) {
     let result = parseInt(e.currentTarget.value);
     if (!isNaN(result)) {
       this.setState({max: result});
-      this.options.maxPrize = result;
+      this.props.auctionConfigStore.options.maxPrize = result;
     }
     this.resetPage();
   }
 
-  @action
   sendNewSearchOption() {
-    this.configService.dispatch(this.options);
+    //this.auctionConfigStore.dispatch();
   }
 
   state = {
