@@ -1,15 +1,15 @@
 import * as React from 'react';
 import { SearchCategory, SearchOptions } from '../services/LinkProviderService';
 import { observer, inject } from 'mobx-react';
+import { computed } from 'mobx';
 import '../css/App.css';
 
-@inject("auctionConfigStore")
+@inject("auctionConfigStore", "auctionStore")
 @observer
 class SideBar extends React.Component<any, any> {
 
-  resetPage() {
-    this.props.auctionConfigStore.options.page = 1;
-    this.sendNewSearchOption();
+  @computed get options() {
+    return this.props.auctionConfigStore.options;
   }
 
   setCategory(input: SearchCategory) {
@@ -19,7 +19,7 @@ class SideBar extends React.Component<any, any> {
 
   handleQueryUpdate(e: React.ChangeEvent<HTMLInputElement>) {
     this.setState({query: e.currentTarget.value});
-    this.props.auctionConfigStore.options.searchQuery = e.currentTarget.value;
+    this.props.auctionConfigStore.update((old: SearchOptions) => {old.searchQuery = e.currentTarget.value; return old;});
     this.resetPage();
   }
 
@@ -27,7 +27,7 @@ class SideBar extends React.Component<any, any> {
     let result = parseInt(e.currentTarget.value);
     if (!isNaN(result)) {
       this.setState({min: result});
-      this.props.auctionConfigStore.options.minPrize = result;
+      this.props.auctionConfigStore.update((old: SearchOptions) => {old.minPrize = result; return old;});
     }
     this.resetPage();
   }
@@ -36,13 +36,14 @@ class SideBar extends React.Component<any, any> {
     let result = parseInt(e.currentTarget.value);
     if (!isNaN(result)) {
       this.setState({max: result});
-      this.props.auctionConfigStore.options.maxPrize = result;
+      this.props.auctionConfigStore.update((old: SearchOptions) => {old.maxPrize = result; return old;});
     }
     this.resetPage();
   }
 
-  sendNewSearchOption() {
-    //this.auctionConfigStore.dispatch();
+  resetPage() {
+    this.props.auctionConfigStore.update((old: SearchOptions) => {old.page = 1; return old;});
+    this.props.auctionStore.downloadAuctions();
   }
 
   state = {

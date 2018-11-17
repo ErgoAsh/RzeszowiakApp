@@ -27,14 +27,14 @@ class AuctionList extends React.Component<any, any> {
     return (
       <div className="content col-md-9">
         <InfiniteScroll
-            pageStart={0}
-            initialLoad={true}
-            loadMore={(page) => this.props.auctionStore.downloadMore(page)}
-            hasMore={this.props.auctionStore.hasMore}
-            loader={<div className="loader">Loading ...</div>}
-            useWindow={false}>
+          pageStart={0}
+          initialLoad={true}
+          loadMore={() => this.props.auctionStore.downloadMore()}
+          hasMore={this.props.auctionStore.hasMore}
+          loader={<div className="loader">Loading ...</div>}
+          useWindow={false}>
 
-            {items}
+          {items}
         </InfiniteScroll>
       </div>
     );

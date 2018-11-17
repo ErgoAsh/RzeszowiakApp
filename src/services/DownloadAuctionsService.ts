@@ -35,10 +35,10 @@ class DownloadAuctionsService {
         let items: Auction[] = [];
 
         $(data).find("div.promobox,div.normalbox").each(function() {
-            let title = $(this).find("div.promobox-title-left,div.normalbox-title-left a");
-            let date = $(this).find("p.promobox-more,p.normalbox-more span b").text();
-            let prize = $(this).find("div.promobox-title-left2,div.normalbox-title-left2 b").text();
-            let image = $(this).find("div.promobox-body-left,div.normalbox-body-left a img");
+            let title = $(this).find("div.promobox-title-left a,div.normalbox-title-left a");
+            let date = $(this).find("p.promobox-more span b,p.normalbox-more span b").text();
+            let prize = $(this).find("div.promobox-title-left2,div.normalbox-title-left2").text();
+            let image = $(this).find("div.promobox-body-left a img,div.normalbox-body-left a img");
             let desc = $(this).find("div.promobox-body-right,div.normalbox-body-right").text();
 
             items.push({
@@ -55,7 +55,7 @@ class DownloadAuctionsService {
     }
 
     hasNextPage(data: JQuery.Node[]): boolean {
-        return $(data).find("div.oDnno span").last().hasClass("oDnnsk");
+        return $(data).find("div#oDnno span").last().hasClass("oDnnsk");
     }
 }
 

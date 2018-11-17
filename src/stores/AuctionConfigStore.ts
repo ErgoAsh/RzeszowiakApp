@@ -21,9 +21,7 @@ class AuctionConfigStore {
 
     @action
     update(functor: (old: SearchOptions) => SearchOptions) {
-        console.log(JSON.stringify(this.options));
         this.options = functor(this.options);
-        console.log(JSON.stringify(this.options));
     }
 }
 

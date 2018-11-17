@@ -1,9 +1,9 @@
 import DownloadAuctionsService from "../services/DownloadAuctionsService";
-import LinkProviderService from "../services/LinkProviderService";
+import LinkProviderService, { SearchOptions } from "../services/LinkProviderService";
 import AuctionConfigStore from "./AuctionConfigStore";
 import Auction from "../models/Auction";
 
-import { observable, action } from "mobx";
+import { observable, action, computed } from "mobx";
 
 class AuctionStore {
 
@@ -21,11 +21,15 @@ class AuctionStore {
         this.configStore = configStore;
     }
 
+    @computed get config(): SearchOptions {
+        return this.configStore.options;
+    }
+
     @action
     downloadAuctions() {
         this.isLoading = true;
-        this.downloadService.process(this.linkService.getLinkByOptions(this.configStore.options), (result, hasMore) => {
-            if (this.configStore.options.page == 1) {
+        this.downloadService.process(this.linkService.getLinkByOptions(this.config), (result, hasMore) => {
+            if (this.config.page == 1) {
                 this.auctions = result;
             } else {
                 this.auctions = this.auctions.concat(result);
@@ -36,13 +40,9 @@ class AuctionStore {
     }
 
     @action
-    downloadMore(page?: number) {
-        if (page)
-            this.configStore.options.page = page;
-        else 
-            this.configStore.options.page++;
-
+    downloadMore() { 
         this.downloadAuctions();
+        this.config.page++;
     }
 }
 
