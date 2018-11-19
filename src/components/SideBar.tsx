@@ -1,25 +1,27 @@
 import * as React from 'react';
-import { SearchCategory, SearchOptions } from '../services/LinkProviderService';
+import { SearchCategory } from '../services/LinkProviderService';
 import { observer, inject } from 'mobx-react';
 import { computed } from 'mobx';
 import '../css/App.css';
+import AuctionStore from 'src/stores/AuctionStore';
+import AuctionConfigStore from 'src/stores/AuctionConfigStore';
 
 @inject("auctionConfigStore", "auctionStore")
 @observer
-class SideBar extends React.Component<any, any> {
+class SideBar extends React.Component<{ auctionStore?: AuctionStore, auctionConfigStore?: AuctionConfigStore}> {
 
   @computed get options() {
-    return this.props.auctionConfigStore.options;
+    return this.props.auctionConfigStore!.options;
   }
 
   setCategory(input: SearchCategory) {
-    this.props.auctionConfigStore.update((old: SearchOptions) => {old.category = input; return old;});
+    this.props.auctionConfigStore!.setCategory(input);
     this.resetPage();
   }
 
   handleQueryUpdate(e: React.ChangeEvent<HTMLInputElement>) {
     this.setState({query: e.currentTarget.value});
-    this.props.auctionConfigStore.update((old: SearchOptions) => {old.searchQuery = e.currentTarget.value; return old;});
+    this.props.auctionConfigStore!.setQuery(e.currentTarget.value);
     this.resetPage();
   }
 
@@ -27,7 +29,7 @@ class SideBar extends React.Component<any, any> {
     let result = parseInt(e.currentTarget.value);
     if (!isNaN(result)) {
       this.setState({min: result});
-      this.props.auctionConfigStore.update((old: SearchOptions) => {old.minPrize = result; return old;});
+      this.props.auctionConfigStore!.setMinimumPrize(result);
     }
     this.resetPage();
   }
@@ -36,14 +38,14 @@ class SideBar extends React.Component<any, any> {
     let result = parseInt(e.currentTarget.value);
     if (!isNaN(result)) {
       this.setState({max: result});
-      this.props.auctionConfigStore.update((old: SearchOptions) => {old.maxPrize = result; return old;});
+      this.props.auctionConfigStore!.setMaximumPrize(result);
     }
     this.resetPage();
   }
 
   resetPage() {
-    this.props.auctionConfigStore.update((old: SearchOptions) => {old.page = 1; return old;});
-    this.props.auctionStore.downloadAuctions();
+    this.props.auctionConfigStore!.setPage(1);
+    this.props.auctionStore!.downloadAuctions();
   }
 
   state = {
@@ -57,7 +59,7 @@ class SideBar extends React.Component<any, any> {
       <div className="sidenav col-md-3">
         <div className="container">
 
-          <h1 className="col-md-12 text-md-center">Kategoria </h1>
+          <h1 className="col-md-12 text-md-center">Kategoria</h1>
 
             <div className="row col-md-12">
             <div className="btn-group-lg text-center pagination-centered">

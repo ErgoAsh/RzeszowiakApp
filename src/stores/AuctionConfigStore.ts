@@ -15,13 +15,38 @@ class AuctionConfigStore {
     };
 
     @action
-    set(options: SearchOptions) {
-        this.options = options;
+    setQuery(query: string) {
+        this.options.searchQuery = query;
     }
 
     @action
-    update(functor: (old: SearchOptions) => SearchOptions) {
-        this.options = functor(this.options);
+    setCategory(category: SearchCategory) {
+        this.options.category = category;
+    }
+
+    @action
+    setPage(page: number) {
+        this.options.page = page;
+    }
+
+    @action
+    setMinimumPrize(minPrize: number) {
+        this.options.minPrize = minPrize;
+    }
+
+    @action
+    setMaximumPrize(maxPrize: number) {
+        this.options.maxPrize = maxPrize;
+    }
+
+    @action
+    setTime(time: TimeQuery) {
+        this.options.time = time;
+    }
+    
+    @action
+    setOrder(sortBy: SortStyle) {
+        this.options.sortBy = sortBy;
     }
 }
 
