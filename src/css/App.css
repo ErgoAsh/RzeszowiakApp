@@ -3,19 +3,26 @@
   height: 100%;
   width: 100%;
   overflow: auto;
+  border: 0 !important;
 }
  /* The sidebar menu */
  .sidenav {
-  height: 95%; /* Full-height: remove this if you want "auto" height */
+  height: 100%; /* Full-height: remove this if you want "auto" height */
   width: 20%; /* Set the width of the sidebar */
-  background-color: #5F5F5F; /* Rzeszowiak main color */
+  background-color: #244C8A; /* Rzeszowiak main color */
   padding-top: 20px;
   color: #FFFFFF !important;
   font-size: 22px;
   padding-left: 10px;
-  overflow: auto;
 }
-
+@media only screen and (max-width: 768px){
+  .sidenav{
+    height: 115%;
+  }
+}
+.navbar{
+  border: 0 !important;
+}
 h1 {
   font-size: 60px;
   margin: 0px;
@@ -36,7 +43,7 @@ h3 {
 input
 {
   border: #f0ad4e 2px solid !important;  
-  background-color: #5F5F5F !important;
+  background-color: #244C8A !important;
   font-size: 28px !important;
   
 }
