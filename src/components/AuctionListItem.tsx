@@ -13,17 +13,13 @@ class AuctionListItem extends React.Component<AuctionItemProps, any> {
       open(this.props.value.link.toString());
   }
 
-  constructor(props: AuctionItemProps) {
-    super(props);
-  }
-
   render() {
     return (
       <div onClick={() => this.onClick()} className="container-fluid">
         <div>
           <div className="ItemInfo col-md-6">
-            {this.props.value.title}
-            <p>Cena: {this.props.value.prize}</p>   
+            <p>{this.props.value.title}</p>
+            <p>Cena: {this.props.value.prize} zł</p>   
           </div>
           <div className="ItemDescription col-md-6"><br />
             <p> {this.props.value.description} </p>   

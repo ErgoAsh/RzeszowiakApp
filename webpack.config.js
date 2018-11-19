@@ -57,11 +57,12 @@ module.exports = {
                 loader: "ts-loader" 
             },
             {
-                test: /\.js$/,
+                test: /\.(js|jsx)$/,
                 exclude: /node_modules/,
                 use: {
                   loader: "babel-loader"
-                }
+                },
+                plugins: ['react-hot-loader/babel']
             },
             {
                 test: /\.css$/,
