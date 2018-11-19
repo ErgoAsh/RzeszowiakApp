@@ -3,12 +3,13 @@ import * as InfiniteScroll from 'react-infinite-scroller';
 import { observer, inject } from 'mobx-react';
 import AuctionListItem from './AuctionListItem';
 import Auction from '../models/Auction';
+import AuctionStore from 'src/stores/AuctionStore';
 
 import "../css/Auction.css";
 
 @inject("auctionConfigStore", "auctionStore")
 @observer
-class AuctionList extends React.Component<any, any> {
+class AuctionList extends React.Component<{ auctionStore?: AuctionStore }> {
 
   state = {
     id_counter: 0
@@ -18,7 +19,7 @@ class AuctionList extends React.Component<any, any> {
     this.state.id_counter = 0;
 
     let items: JSX.Element[] = [];
-    this.props.auctionStore.auctions.map((auction: Auction) => {
+    this.props.auctionStore!.auctions.map((auction: Auction) => {
       items.push(
         <AuctionListItem key={this.state.id_counter++} value={auction}/>
       )
@@ -27,14 +28,14 @@ class AuctionList extends React.Component<any, any> {
     return (
       <div className="content col-md-9">
         <InfiniteScroll
-            pageStart={0}
-            initialLoad={true}
-            loadMore={(page) => this.props.auctionStore.downloadMore(page)}
-            hasMore={this.props.auctionStore.hasMore}
-            loader={<div className="loader">Loading ...</div>}
-            useWindow={false}>
+          pageStart={0}
+          initialLoad={true}
+          loadMore={() => this.props.auctionStore!.downloadMore()}
+          hasMore={this.props.auctionStore!.hasMore}
+          loader={<div className="loader">Loading ...</div>}
+          useWindow={false}>
 
-            {items}
+          {items}
         </InfiniteScroll>
       </div>
     );

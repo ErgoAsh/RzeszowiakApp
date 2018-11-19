@@ -2,7 +2,7 @@ import { observable } from "mobx";
 
 class LinkProviderService {
 
-    getLink(searchQuery: string | null, category: SearchCategory, page: number, minPrize: number | null, maxPrize: number | null, time: TimeQuery, sortBy: SortStyle): URL {
+    getLink(searchQuery: string | null, category: SearchCategory, page: number, minPrize: number | undefined, maxPrize: number | undefined, time: TimeQuery, sortBy: SortStyle): URL {
 
         let base = "http://www.rzeszowiak.pl/Nieruchomosci-Sprzedam-307"; //Last 3 numbers are pages
 
@@ -13,8 +13,8 @@ class LinkProviderService {
         base += time.valueOf() + 1; //Time constraint
 
         base += "?r=" + category.valueOf();
-        if (minPrize != null && minPrize != 0) base += "&min=" + minPrize;
-        if (maxPrize != null && minPrize != 0) base += "&max=" + maxPrize;
+        if (minPrize != undefined && minPrize != 0) base += "&min=" + minPrize;
+        if (maxPrize != undefined && minPrize != 0) base += "&max=" + maxPrize;
 
         console.log(base);
         return new URL(base);
@@ -35,8 +35,8 @@ export class SearchOptions {
     @observable searchQuery: string | null;
     @observable category: SearchCategory;
     @observable page: number;
-    @observable minPrize: number | null;
-    @observable maxPrize: number | null; 
+    @observable minPrize: number | undefined;
+    @observable maxPrize: number | undefined; 
     @observable time: TimeQuery;
     @observable sortBy: SortStyle;
 }

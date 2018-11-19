@@ -8,22 +8,45 @@ class AuctionConfigStore {
         searchQuery: null, 
         category: SearchCategory.Domy, 
         page: 1, 
-        minPrize: null, 
-        maxPrize: null, 
+        minPrize: undefined, 
+        maxPrize: undefined, 
         time: TimeQuery.Days_30, 
         sortBy: SortStyle.Prize_DESC
     };
 
     @action
-    set(options: SearchOptions) {
-        this.options = options;
+    setQuery(query: string) {
+        this.options.searchQuery = query;
     }
 
     @action
-    update(functor: (old: SearchOptions) => SearchOptions) {
-        console.log(JSON.stringify(this.options));
-        this.options = functor(this.options);
-        console.log(JSON.stringify(this.options));
+    setCategory(category: SearchCategory) {
+        this.options.category = category;
+    }
+
+    @action
+    setPage(page: number) {
+        this.options.page = page;
+    }
+
+    @action
+    setMinimumPrize(minPrize: number | undefined) {
+        this.options.minPrize = minPrize;
+    }
+
+    @action
+    setMaximumPrize(maxPrize: number | undefined) {
+        this.options.maxPrize = maxPrize;
+    }
+
+    @action
+    setTime(time: TimeQuery) {
+        this.options.time = time;
+    }
+    
+    @action
+    setOrder(sortBy: SortStyle) {
+        this.options.sortBy = sortBy;
     }
 }
 
