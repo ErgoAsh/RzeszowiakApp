@@ -40,6 +40,14 @@ input
   font-size: 28px !important;
   
 }
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+input[type="number"] {
+    -moz-appearance: textfield;
+}
 .float-label {
   margin: 0;
   padding: 0;

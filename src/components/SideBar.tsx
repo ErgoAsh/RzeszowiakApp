@@ -6,9 +6,15 @@ import '../css/App.css';
 import AuctionStore from 'src/stores/AuctionStore';
 import AuctionConfigStore from 'src/stores/AuctionConfigStore';
 
+interface ISideBarState {
+  query: string,
+  min: number | undefined,
+  max: number | undefined
+}
+
 @inject("auctionConfigStore", "auctionStore")
 @observer
-class SideBar extends React.Component<{ auctionStore?: AuctionStore, auctionConfigStore?: AuctionConfigStore}> {
+class SideBar extends React.Component<{ auctionStore?: AuctionStore, auctionConfigStore?: AuctionConfigStore}, ISideBarState> {
 
   @computed get options() {
     return this.props.auctionConfigStore!.options;
@@ -26,8 +32,12 @@ class SideBar extends React.Component<{ auctionStore?: AuctionStore, auctionConf
   }
 
   handleMinPrizeChange(e: React.ChangeEvent<HTMLInputElement>) {
-    let result = parseInt(e.currentTarget.value);
-    if (!isNaN(result)) {
+    let val = e.target.value;
+    if (val === '') {
+      this.setState({min: undefined})
+      this.props.auctionConfigStore!.setMinimumPrize(undefined);
+    } else {
+      let result = parseInt(val);
       this.setState({min: result});
       this.props.auctionConfigStore!.setMinimumPrize(result);
     }
@@ -35,8 +45,12 @@ class SideBar extends React.Component<{ auctionStore?: AuctionStore, auctionConf
   }
 
   handleMaxPrizeChange(e: React.ChangeEvent<HTMLInputElement>) {
-    let result = parseInt(e.currentTarget.value);
-    if (!isNaN(result)) {
+    let val = e.target.value;
+    if (val === '') {
+      this.setState({max: undefined})
+      this.props.auctionConfigStore!.setMaximumPrize(undefined);
+    } else {
+      let result = parseInt(val);
       this.setState({max: result});
       this.props.auctionConfigStore!.setMaximumPrize(result);
     }
@@ -50,8 +64,8 @@ class SideBar extends React.Component<{ auctionStore?: AuctionStore, auctionConf
 
   state = {
     query: "",
-    min: 0,
-    max: 0
+    min: undefined,
+    max: undefined
   }
 
   render() {
@@ -74,12 +88,12 @@ class SideBar extends React.Component<{ auctionStore?: AuctionStore, auctionConf
         <div className="container">
            
           <fieldset className="float-label">
-            <input onChange={(e) => this.handleMinPrizeChange(e)} value={this.state.min} placeholder="" name="od" type="text" className="form-control" required />
+            <input onChange={(e) => this.handleMinPrizeChange(e)} value={this.state.min} name="od" type="number" className="form-control" required />
             <label htmlFor="od">Od</label>
           </fieldset>
 
           <fieldset className="float-label">
-            <input onChange={(e) => this.handleMaxPrizeChange(e)} value={this.state.max} placeholder="" name="do" type="text" className="form-control" required />
+            <input onChange={(e) => this.handleMaxPrizeChange(e)} value={this.state.max} name="do" type="number" className="form-control" required />
             <label htmlFor="do">Do</label>
           </fieldset>
           
