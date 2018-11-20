@@ -37,6 +37,9 @@ ul
 .Item:hover{
     opacity: 0.85;
     cursor: pointer;
+    -webkit-box-shadow: 3px 22px 33px 10px rgba(0,0,0,0.81);
+    -moz-box-shadow: 3px 22px 33px 10px rgba(0,0,0,0.81);
+    box-shadow: 3px 22px 33px 10px rgba(0,0,0,0.81);
 }
 .ItemInfo
 {
