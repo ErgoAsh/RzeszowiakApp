@@ -1,23 +1,82 @@
+@import url('https://fonts.googleapis.com/css?family=Slabo+27px');
 .app
 {
   height: 100%;
   width: 100%;
   overflow: auto;
   border: 0 !important;
+  font-family: 'Slabo 27px', serif !important;
 }
  /* The sidebar menu */
  .sidenav {
   height: 100%; /* Full-height: remove this if you want "auto" height */
-  width: 20%; /* Set the width of the sidebar */
   background-color: #244C8A; /* Rzeszowiak main color */
   padding-top: 20px;
   color: #FFFFFF !important;
   font-size: 22px;
   padding-left: 10px;
 }
+.sidenav img{
+  width: 15rem;
+  height: 10rem;
+}
+@media only screen and (max-width: 992px){
+  .sidenav{
+    height: 80%;
+  }
+  .sidenav img{
+    width: 27rem;
+    height: 18rem;
+  }
+}
+@media only screen and (max-width: 800px){
+  .sidenav{
+    height: 60%;
+  }
+}
 @media only screen and (max-width: 768px){
   .sidenav{
+    height: 70%;
+  }
+}
+@media only screen and (max-width: 640px){
+  .sidenav{
+    height: 200%;
+  }
+}
+@media only screen and (max-width: 600px){
+  .sidenav{
+    height: 80%;
+  }
+}
+@media only screen and (max-width: 415px){
+  .sidenav{
+    height: 100%;
+  }
+}
+@media only screen and (max-width: 412px){
+  .sidenav{
+    height: 110%;
+  }
+}
+@media only screen and (max-width: 384px){
+  .sidenav{
     height: 115%;
+  }
+}
+@media only screen and (max-width: 376px){
+  .sidenav{
+    height: 110%;
+  }
+}
+@media only screen and (max-width: 360px){
+  .sidenav{
+    height: 125%;
+  }
+}
+@media only screen and (max-width: 320px){
+  .sidenav{
+    height: 145%;
   }
 }
 .navbar{
@@ -34,10 +93,13 @@ h3 {
   padding: 0px;
   color: #CCCCCC;
 }
-
 .btn-warning
 {
   margin-left: 5px;
+  /*
+  background: #ea8823 !important;
+  border: #ea8823 !important;
+  */
 }
 
 input
@@ -81,7 +143,7 @@ input[type="number"] {
 }
 .float-label input {
   z-index: 1;
-  height: 1.5em;
+  height: 1.7em;
   text-align: center;
 }
 .float-label input:valid,
@@ -335,10 +397,15 @@ h2:last-of-type{
   width: 100%;
   height: 42px;
   padding: 0 15px;
-  font-size: 1em;
-  color: #8b9ab2;
+  font-size: 1.3vw !important;
+  color: #FFFFFF !important;
   border-radius: 8px;
   border: 1px solid #e7eaef;
+}
+@media only screen and (max-width: 768px){
+  .dropdown input{
+    font-size: 3vw !important;
+  }
 }
 .dropdown:after {
   position: absolute;
@@ -363,9 +430,8 @@ h2:last-of-type{
   left: 0;
   width: 100%;
   overflow: hidden;
-  background-color: white;
+  background-color: #FFFFFF;
   border-radius: 8px;
-  box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
 }
 .dropdown__list ul {
   height: 200px;
@@ -376,47 +442,24 @@ h2:last-of-type{
   cursor: pointer;
 }
 .dropdown__list li:hover {
-  background-color: #0854ff;
+  background-color: #f0ad4e;
   color: white;
 }
-
+.dropdown__list ul li{
+  height: 33.3%;
+}
 /* other styles */
 * {
   box-sizing: border-box;
 }
-
-body {
-  background-color: #0f227a;
-  font-family: Arial;
-  font-size: 14px;
-  color: #8b9ab2;
+.sorting{
+  margin-top: 2rem;
 }
-
-h1 {
-  margin: 0 0 .4em;
-  color: #0854ff;
-  font-size: 2em;
-  font-weight: bold;
-}
-
-p {
-  margin: 0 0 2em;
-  font-size: 1em;
-  line-height: 1.4em;
-}
-
-.content {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  padding: 60px;
-}
-
-.content__inner {
-  max-width: 600px;
-  padding: 80px 140px;
-  background-color: white;
-  border-radius: 8px;
-  box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
+@media only screen and (max-width: 992px){
+  .content{
+    max-width: 100% !important;
+  }
+  .sidenav{
+    max-width: 100% !important;
+  }
 }

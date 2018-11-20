@@ -5,6 +5,7 @@ import { computed } from 'mobx';
 import '../css/App.css';
 import AuctionStore from 'src/stores/AuctionStore';
 import AuctionConfigStore from 'src/stores/AuctionConfigStore';
+import '../effects/Dropdown';
 
 interface ISideBarState {
   query: string,
@@ -72,7 +73,7 @@ class SideBar extends React.Component<{ auctionStore?: AuctionStore, auctionConf
     return (
       <div className="sidenav col-md-3">
         <div className="container">
-
+          <p className="text-center"><img src="/./images/rzeszow-logo.png" /></p>
           <h1 className="col-md-12 text-md-center">Kategoria</h1>
 
             <div className="row col-md-12">
@@ -106,12 +107,32 @@ class SideBar extends React.Component<{ auctionStore?: AuctionStore, auctionConf
             <label htmlFor="phrase">Fraza</label>
           </fieldset>
         </div>
-
+        
         <div className="container">
-          <p className="col-md-12 text-md-left">Ogłoszenia z ostatnich</p>
-
-
+         <div className="dropdown">
+           <input type="text" name="seen-value" placeholder="Ogłoszenia z ostatnich" required />
+           <input type="hidden" name="hidden-value" required />
+             <div className="dropdown__list">
+              <ul>
+                <li data-value=""></li>
+                <li data-value="24">24 Godzin</li>
+                <li data-value="3">3 Dni</li>
+                <li data-value="7">7 Dni</li>
+                <li data-value="14">14 Dni</li>
+                <li data-value="30">30 Dni</li>
+              </ul>
+             </div>
+          </div>
         </div>
+
+        <div className="container text-center sorting">
+          <div className="btn-group-lg text-left pagination-centered">
+            <p className="h2">Sortuj według</p>
+            <button type="button" className="btn btn-warning">Ceny</button>
+            <button type="button" className="btn btn-warning">Daty dodania</button>
+          </div>
+        </div>
+
       </div>
     );
   }

@@ -32,7 +32,7 @@ class AuctionList extends React.Component<{ auctionStore?: AuctionStore }> {
           initialLoad={true}
           loadMore={() => this.props.auctionStore!.downloadMore()}
           hasMore={this.props.auctionStore!.hasMore}
-          loader={<div className="loader">Loading ...</div>}
+          loader={<div className="loader"><img src="/./images/load.gif" /></div>}
           useWindow={false}>
 
           {items}

@@ -62,7 +62,6 @@ module.exports = {
                 use: {
                   loader: "babel-loader"
                 },
-                plugins: ['react-hot-loader/babel']
             },
             {
                 test: /\.css$/,
