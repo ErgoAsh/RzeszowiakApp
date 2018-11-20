@@ -42,7 +42,7 @@ class AuctionStore {
     @action
     downloadMore() { 
         this.downloadAuctions();
-        this.config.page++;
+        this.configStore.nextPage();
     }
 }
 

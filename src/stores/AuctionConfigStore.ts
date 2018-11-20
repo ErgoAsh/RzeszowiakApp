@@ -25,11 +25,6 @@ class AuctionConfigStore {
     }
 
     @action
-    setPage(page: number) {
-        this.options.page = page;
-    }
-
-    @action
     setMinimumPrize(minPrize: number | undefined) {
         this.options.minPrize = minPrize;
     }
@@ -47,6 +42,16 @@ class AuctionConfigStore {
     @action
     setOrder(sortBy: SortStyle) {
         this.options.sortBy = sortBy;
+    }
+
+    @action
+    setPage(page: number) {
+        this.options.page = page;
+    }
+
+    @action
+    nextPage() {
+        this.options.page++;
     }
 }
 
