@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Slabo+27px');
+
 .app
 {
   height: 100%;
@@ -18,15 +19,15 @@
 }
 .sidenav img{
   width: 15rem;
-  height: 10rem;
+  height: 15rem;
 }
 @media only screen and (max-width: 992px){
   .sidenav{
     height: 80%;
   }
   .sidenav img{
-    width: 27rem;
-    height: 18rem;
+    width: 25rem;
+    height: 25rem;
   }
 }
 @media only screen and (max-width: 800px){
@@ -80,6 +81,9 @@
   }
 }
 .navbar{
+  border: 0 !important;
+}
+.type{
   border: 0 !important;
 }
 h1 {

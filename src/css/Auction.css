@@ -9,7 +9,6 @@
     overflow-x: hidden; /* Disable horizontal scroll */
     position: relative; /* Fixed Sidebar (stay in place on scroll) */
     font-size: 30px;
-    overflow: auto;
     background: url('/./images/Rzeszow.jpg') no-repeat;
     background-size: cover;
     padding: 0 !important;
@@ -36,7 +35,7 @@ ul
     opacity: 0.7;
 }
 .Item:hover{
-    opacity: 0.8;
+    opacity: 0.85;
     cursor: pointer;
 }
 .ItemInfo
@@ -44,11 +43,16 @@ ul
     height: 100%;
     font-weight: bold;
 }
+@media only screen and (max-width: 992px){
+    .ItemInfo{
+        text-align: center;
+    }
+}
 .ItemDescription
 {
     overflow: hidden;
     height: 100%;
-    font-size: 11px;
+    font-size: 15px;
 }
 .container-fluid
 {

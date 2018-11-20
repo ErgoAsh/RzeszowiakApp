@@ -76,7 +76,7 @@ class SideBar extends React.Component<{ auctionStore?: AuctionStore, auctionConf
           <p className="text-center"><img src="/./images/rzeszow-logo.png" /></p>
           <h1 className="col-md-12 text-md-center">Kategoria</h1>
 
-            <div className="row col-md-12">
+            <div className="container-fluid col-md-12 type">
             <div className="btn-group-lg text-center pagination-centered">
               <button onClick={() => this.setCategory(SearchCategory.Mieszkania)} type="button" className="btn btn-warning">Mieszkania</button>
               <button onClick={() => this.setCategory(SearchCategory.Domy)} type="button" className="btn btn-warning">Domy</button>
@@ -126,7 +126,7 @@ class SideBar extends React.Component<{ auctionStore?: AuctionStore, auctionConf
         </div>
 
         <div className="container text-center sorting">
-          <div className="btn-group-lg text-left pagination-centered">
+          <div className="btn-group-lg text-center pagination-centered">
             <p className="h2">Sortuj według</p>
             <button type="button" className="btn btn-warning">Ceny</button>
             <button type="button" className="btn btn-warning">Daty dodania</button>

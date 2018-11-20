@@ -17,11 +17,11 @@ class AuctionListItem extends React.Component<AuctionItemProps, any> {
     return (
       <div className="Item">
         <div onClick={() => this.onClick()} className="container-fluid">
-            <div className="ItemInfo col-md-6">
+            <div className="ItemInfo col-md-4">
               <p>{this.props.value.title}</p>
               <p>Cena: {this.props.value.prize} zł</p>   
             </div>
-            <div className="ItemDescription col-md-6"><br />
+            <div className="ItemDescription col-md-8"><br />
               <p> {this.props.value.description} </p>   
             </div>
         </div>
