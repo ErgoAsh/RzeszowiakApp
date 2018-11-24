@@ -6,6 +6,7 @@ src/config/configSec.js
 
 .DS_STORE
 node_modules/
+platforms/
 dist/
 *~
 *.pyc
