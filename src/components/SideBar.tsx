@@ -5,6 +5,7 @@ import { computed } from 'mobx';
 import '../css/App.css';
 import AuctionStore from 'src/stores/AuctionStore';
 import AuctionConfigStore from 'src/stores/AuctionConfigStore';
+import '../effects/Dropdown';
 
 interface ISideBarState {
   query: string,
@@ -72,10 +73,10 @@ class SideBar extends React.Component<{ auctionStore?: AuctionStore, auctionConf
     return (
       <div className="sidenav col-md-3">
         <div className="container">
-
+          <p className="text-center"><img src="/./images/rzeszow-logo.png" /></p>
           <h1 className="col-md-12 text-md-center">Kategoria</h1>
 
-            <div className="row col-md-12">
+            <div className="container-fluid col-md-12 type">
             <div className="btn-group-lg text-center pagination-centered">
               <button onClick={() => this.setCategory(SearchCategory.Mieszkania)} type="button" className="btn btn-warning">Mieszkania</button>
               <button onClick={() => this.setCategory(SearchCategory.Domy)} type="button" className="btn btn-warning">Domy</button>
@@ -106,32 +107,32 @@ class SideBar extends React.Component<{ auctionStore?: AuctionStore, auctionConf
             <label htmlFor="phrase">Fraza</label>
           </fieldset>
         </div>
-
+        
         <div className="container">
-          <p className="col-md-12 text-md-left">Ogłoszenia z ostatnich</p>
-          <div className="container">
-            <div className="custom-checkbox">
-              <input type="checkbox" name="checkbox-cust-1" className="checkbox-custom" id="checkbox-cust-1" />
-              <label htmlFor="checkbox-cust-1" className="checkbox-custom-label">24 godzin</label>
-            </div>
-            <div className="custom-checkbox">
-              <input type="checkbox" name="checkbox-cust-2" className="checkbox-custom" id="checkbox-cust-2" />
-              <label htmlFor="checkbox-cust-2" className="checkbox-custom-label">3 dni</label>
-            </div>
-            <div className="custom-checkbox">
-              <input type="checkbox" name="checkbox-cust-3" className="checkbox-custom" id="checkbox-cust-3" />
-              <label htmlFor="checkbox-cust-3" className="checkbox-custom-label">7 dni</label>
-            </div>
-            <div className="custom-checkbox">
-              <input type="checkbox" name="checkbox-cust-4" className="checkbox-custom" id="checkbox-cust-4" />
-              <label htmlFor="checkbox-cust-4" className="checkbox-custom-label">14 dni</label>
-            </div>
-            <div className="custom-checkbox">
-              <input type="checkbox" name="checkbox-cust-5" className="checkbox-custom" id="checkbox-cust-5" />
-              <label htmlFor="checkbox-cust-5" className="checkbox-custom-label">30 dni</label>
-            </div>
+         <div className="dropdown">
+           <input type="text" name="seen-value" placeholder="Ogłoszenia z ostatnich" required />
+           <input type="hidden" name="hidden-value" required />
+             <div className="dropdown__list">
+              <ul>
+                <li data-value=""></li>
+                <li data-value="24">24 Godzin</li>
+                <li data-value="3">3 Dni</li>
+                <li data-value="7">7 Dni</li>
+                <li data-value="14">14 Dni</li>
+                <li data-value="30">30 Dni</li>
+              </ul>
+             </div>
           </div>
         </div>
+
+        <div className="container text-center sorting">
+          <div className="btn-group-lg text-center pagination-centered">
+            <p className="h2">Sortuj według</p>
+            <button type="button" className="btn btn-warning">Ceny</button>
+            <button type="button" className="btn btn-warning">Daty dodania</button>
+          </div>
+        </div>
+
       </div>
     );
   }

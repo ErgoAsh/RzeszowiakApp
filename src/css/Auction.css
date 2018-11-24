@@ -1,14 +1,18 @@
+@import url('https://fonts.googleapis.com/css?family=Slabo+27px');
+
 .content
 {
-    width: 80%;
-    height: 95%;
+    height: 100%;
     z-index: 1; /* Stay on top */
     top: 0; /* Stay at the top */
     left: 0;
     overflow-x: hidden; /* Disable horizontal scroll */
     position: relative; /* Fixed Sidebar (stay in place on scroll) */
     font-size: 30px;
-    overflow: auto;
+    background: url('/./images/Rzeszow.jpg') no-repeat;
+    background-size: cover;
+    padding: 0 !important;
+    font-family: 'Slabo 27px', serif;
 }
 img {
     width: 100%; /* You can set the dimensions to whatever you want */
@@ -26,16 +30,32 @@ ul
     padding: 3px;
 
 }
+.Item{
+    background: #FFFFFF;
+    opacity: 0.7;
+}
+.Item:hover{
+    opacity: 0.85;
+    cursor: pointer;
+    -webkit-box-shadow: 3px 22px 33px 10px rgba(0,0,0,0.81);
+    -moz-box-shadow: 3px 22px 33px 10px rgba(0,0,0,0.81);
+    box-shadow: 3px 22px 33px 10px rgba(0,0,0,0.81);
+}
 .ItemInfo
 {
     height: 100%;
     font-weight: bold;
 }
+@media only screen and (max-width: 992px){
+    .ItemInfo{
+        text-align: center;
+    }
+}
 .ItemDescription
 {
     overflow: hidden;
     height: 100%;
-    font-size: 11px;
+    font-size: 15px;
 }
 .container-fluid
 {
@@ -45,4 +65,10 @@ ul
 }
 .loader {
     text-align: center;
+    background: #FFFFFF;
+    opacity: 0.8;
+}
+.loader img{
+    width: 8rem;
+    height: 5rem;
 }

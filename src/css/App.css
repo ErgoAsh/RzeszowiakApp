@@ -1,21 +1,91 @@
+@import url('https://fonts.googleapis.com/css?family=Slabo+27px');
+
 .app
 {
   height: 100%;
   width: 100%;
   overflow: auto;
+  border: 0 !important;
+  font-family: 'Slabo 27px', serif !important;
 }
  /* The sidebar menu */
  .sidenav {
-  height: 95%; /* Full-height: remove this if you want "auto" height */
-  width: 20%; /* Set the width of the sidebar */
-  background-color: #5F5F5F; /* Rzeszowiak main color */
+  height: 100%; /* Full-height: remove this if you want "auto" height */
+  background-color: #244C8A; /* Rzeszowiak main color */
   padding-top: 20px;
   color: #FFFFFF !important;
   font-size: 22px;
   padding-left: 10px;
-  overflow: auto;
 }
-
+.sidenav img{
+  width: 15rem;
+  height: 15rem;
+}
+@media only screen and (max-width: 992px){
+  .sidenav{
+    height: 80%;
+  }
+  .sidenav img{
+    width: 25rem;
+    height: 25rem;
+  }
+}
+@media only screen and (max-width: 800px){
+  .sidenav{
+    height: 60%;
+  }
+}
+@media only screen and (max-width: 768px){
+  .sidenav{
+    height: 70%;
+  }
+}
+@media only screen and (max-width: 640px){
+  .sidenav{
+    height: 200%;
+  }
+}
+@media only screen and (max-width: 600px){
+  .sidenav{
+    height: 80%;
+  }
+}
+@media only screen and (max-width: 415px){
+  .sidenav{
+    height: 100%;
+  }
+}
+@media only screen and (max-width: 412px){
+  .sidenav{
+    height: 110%;
+  }
+}
+@media only screen and (max-width: 384px){
+  .sidenav{
+    height: 115%;
+  }
+}
+@media only screen and (max-width: 376px){
+  .sidenav{
+    height: 110%;
+  }
+}
+@media only screen and (max-width: 360px){
+  .sidenav{
+    height: 125%;
+  }
+}
+@media only screen and (max-width: 320px){
+  .sidenav{
+    height: 145%;
+  }
+}
+.navbar{
+  border: 0 !important;
+}
+.type{
+  border: 0 !important;
+}
 h1 {
   font-size: 60px;
   margin: 0px;
@@ -27,16 +97,19 @@ h3 {
   padding: 0px;
   color: #CCCCCC;
 }
-
 .btn-warning
 {
   margin-left: 5px;
+  /*
+  background: #ea8823 !important;
+  border: #ea8823 !important;
+  */
 }
 
 input
 {
   border: #f0ad4e 2px solid !important;  
-  background-color: #5F5F5F !important;
+  background-color: #244C8A !important;
   font-size: 28px !important;
   
 }
@@ -74,7 +147,7 @@ input[type="number"] {
 }
 .float-label input {
   z-index: 1;
-  height: 1.5em;
+  height: 1.9em;
   text-align: center;
 }
 .float-label input:valid,
@@ -109,13 +182,13 @@ input[type="number"] {
 }
 
 ul li{
-  color: #f0ad4e;
+  color: #244C8A;
   display: block;
   position: relative;
   float: left;
   width: 100%;
   height: 100px;
-	border-bottom: 1px solid #333;
+  text-align: center;
 }
 
 ul li input[type=radio]{
@@ -134,6 +207,7 @@ ul li label{
   z-index: 9;
   cursor: pointer;
   -webkit-transition: all 0.25s linear;
+  cursor: pointer;
 }
 
 ul li:hover label{
@@ -319,4 +393,79 @@ h2:last-of-type{
 }
 .radio-custom:checked+.radio-custom-label:before {
   border: 2px solid #FFFFFF;
+}
+/* dropdown styles */
+.dropdown {
+  position: relative;
+}
+.dropdown input {
+  width: 100%;
+  height: 42px;
+  padding: 0 15px;
+  font-size: 1.3vw !important;
+  color: #FFFFFF !important;
+  border-radius: 8px;
+  border: 1px solid #e7eaef;
+  cursor: pointer;
+}
+@media only screen and (max-width: 768px){
+  .dropdown input{
+    font-size: 3vw !important;
+  }
+}
+.dropdown:after {
+  position: absolute;
+  right: 20px;
+  top: 19px;
+  content: '';
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 4px 4px 0 4px;
+  border-color: #8b9ab2 transparent transparent transparent;
+}
+.dropdown--open .dropdown__list {
+  display: block;
+}
+
+.dropdown__list {
+  position: absolute;
+  z-index: 2;
+  display: none;
+  top: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  background-color: #FFFFFF;
+  border-radius: 8px;
+}
+.dropdown__list ul {
+  height: 150px;
+  overflow: auto;
+}
+.dropdown__list li {
+  padding: 10px;
+  cursor: pointer;
+}
+.dropdown__list li:hover {
+  background-color: #f0ad4e;
+  color: white;
+}
+.dropdown__list ul li{
+  height: 33.3%;
+}
+/* other styles */
+* {
+  box-sizing: border-box;
+}
+.sorting{
+  margin-top: 2rem;
+}
+@media only screen and (max-width: 992px){
+  .content{
+    max-width: 100% !important;
+  }
+  .sidenav{
+    max-width: 100% !important;
+  }
 }
