@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { SearchCategory } from '../services/LinkProviderService';
+import { SearchCategory, SortStyle, TimeQuery } from '../services/LinkProviderService';
 import { observer, inject } from 'mobx-react';
 import { computed } from 'mobx';
 import '../css/App.css';
@@ -25,10 +25,34 @@ class SideBar extends React.Component<{ auctionStore?: AuctionStore, auctionConf
     this.props.auctionConfigStore!.setCategory(input);
     this.resetPage();
   }
-
+  setSortByDate() {
+    if(this.props.auctionConfigStore!.options.sortBy == SortStyle.Date_ASC)
+    {
+    this.props.auctionConfigStore!.setOrder(SortStyle.Date_DESC);
+    }
+    else{
+      this.props.auctionConfigStore!.setOrder(SortStyle.Date_ASC);
+    }
+    this.resetPage();
+  }
+  setSortByPrice(){
+    if(this.props.auctionConfigStore!.options.sortBy == SortStyle.Prize_ASC)
+    {
+    this.props.auctionConfigStore!.setOrder(SortStyle.Prize_DESC);
+    }
+    else{
+      this.props.auctionConfigStore!.setOrder(SortStyle.Prize_ASC);
+    }
+    this.resetPage();
+  }
   handleQueryUpdate(e: React.ChangeEvent<HTMLInputElement>) {
     this.setState({query: e.currentTarget.value});
     this.props.auctionConfigStore!.setQuery(e.currentTarget.value);
+    this.resetPage();
+  }
+
+  handleMouseEnter(t: number){
+    this.props.auctionConfigStore!.setTime(t);
     this.resetPage();
   }
 
@@ -110,16 +134,15 @@ class SideBar extends React.Component<{ auctionStore?: AuctionStore, auctionConf
         
         <div className="container">
          <div className="dropdown">
-           <input type="text" name="seen-value" placeholder="Ogłoszenia z ostatnich" required />
+           <input type="text" name="seen-value" placeholder="Ogłoszenia z" required data-value="24" />
            <input type="hidden" name="hidden-value" required />
-             <div className="dropdown__list">
-              <ul>
-                <li data-value=""></li>
-                <li data-value="24">24 Godzin</li>
-                <li data-value="3">3 Dni</li>
-                <li data-value="7">7 Dni</li>
-                <li data-value="14">14 Dni</li>
-                <li data-value="30">30 Dni</li>
+             <div className="dropdown__list" >
+              <ul >
+                <li data-value="24" onClick={() => this.handleMouseEnter(TimeQuery.Hours_24)} >24 Godzin</li>
+                <li data-value="3" onClick={() => this.handleMouseEnter(TimeQuery.Days_3)} >3 Dni</li>
+                <li data-value="7" onClick={() => this.handleMouseEnter(TimeQuery.Days_7)} >7 Dni</li>
+                <li data-value="14" onClick={() => this.handleMouseEnter(TimeQuery.Days_14)} >14 Dni</li>
+                <li data-value="30" onClick={() => this.handleMouseEnter(TimeQuery.Days_30)} >30 Dni</li>
               </ul>
              </div>
           </div>
@@ -128,8 +151,8 @@ class SideBar extends React.Component<{ auctionStore?: AuctionStore, auctionConf
         <div className="container text-center sorting">
           <div className="btn-group-lg text-center pagination-centered">
             <p className="h2">Sortuj według</p>
-            <button type="button" className="btn btn-warning">Ceny</button>
-            <button type="button" className="btn btn-warning">Daty dodania</button>
+            <button onClick={() => this.setSortByPrice()} type="button" className="btn btn-warning">Ceny</button>
+            <button onClick={() => this.setSortByDate()} type="button" className="btn btn-warning">Daty dodania</button>
           </div>
         </div>
 
