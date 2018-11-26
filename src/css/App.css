@@ -18,8 +18,8 @@
   padding-left: 10px;
 }
 .sidenav img{
-  width: 15rem;
-  height: 15rem;
+  width: 12rem;
+  height: 12rem;
 }
 @media only screen and (max-width: 992px){
   .sidenav{
