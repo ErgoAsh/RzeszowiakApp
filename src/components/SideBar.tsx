@@ -10,7 +10,9 @@ import '../effects/Dropdown';
 interface ISideBarState {
   query: string,
   min: number | undefined,
-  max: number | undefined
+  max: number | undefined,
+  sortByDate: string,
+  sortByPrice: string
 }
 
 @inject("auctionConfigStore", "auctionStore")
@@ -25,26 +27,43 @@ class SideBar extends React.Component<{ auctionStore?: AuctionStore, auctionConf
     this.props.auctionConfigStore!.setCategory(input);
     this.resetPage();
   }
+
   setSortByDate() {
-    if(this.props.auctionConfigStore!.options.sortBy == SortStyle.Date_ASC)
+    if (this.props.auctionConfigStore!.options.sortBy == SortStyle.Date_ASC)
     {
-    this.props.auctionConfigStore!.setOrder(SortStyle.Date_DESC);
-    }
-    else{
+      this.props.auctionConfigStore!.setOrder(SortStyle.Date_DESC);
+      this.setState({
+        sortByDate: "Daty dodania &darr;",
+        sortByPrice: "Ceny"
+      });
+    } else {
       this.props.auctionConfigStore!.setOrder(SortStyle.Date_ASC);
+      this.setState({
+        sortByDate: "Daty dodania &uarr;",
+        sortByPrice: "Ceny"
+      });
     }
     this.resetPage();
   }
+
   setSortByPrice(){
-    if(this.props.auctionConfigStore!.options.sortBy == SortStyle.Prize_ASC)
+    if (this.props.auctionConfigStore!.options.sortBy == SortStyle.Prize_ASC)
     {
-    this.props.auctionConfigStore!.setOrder(SortStyle.Prize_DESC);
-    }
-    else{
+      this.props.auctionConfigStore!.setOrder(SortStyle.Prize_DESC);
+      this.setState({
+        sortByDate: "Daty dodania",
+        sortByPrice: "Ceny &darr;"
+      });
+    } else {
       this.props.auctionConfigStore!.setOrder(SortStyle.Prize_ASC);
+      this.setState({
+        sortByDate: "Daty dodania",
+        sortByPrice: "Ceny &uarr;"
+      });
     }
     this.resetPage();
   }
+
   handleQueryUpdate(e: React.ChangeEvent<HTMLInputElement>) {
     this.setState({query: e.currentTarget.value});
     this.props.auctionConfigStore!.setQuery(e.currentTarget.value);
@@ -89,6 +108,8 @@ class SideBar extends React.Component<{ auctionStore?: AuctionStore, auctionConf
 
   state = {
     query: "",
+    sortByDate: "Ceny",
+    sortByPrice: "Daty dodania",
     min: undefined,
     max: undefined
   }
@@ -151,8 +172,8 @@ class SideBar extends React.Component<{ auctionStore?: AuctionStore, auctionConf
         <div className="container text-center sorting">
           <div className="btn-group-lg text-center pagination-centered">
             <p className="h2">Sortuj według</p>
-            <button onClick={() => this.setSortByPrice()} type="button" className="btn btn-warning">Ceny</button>
-            <button onClick={() => this.setSortByDate()} type="button" className="btn btn-warning">Daty dodania</button>
+            <input onClick={() => this.setSortByPrice()} value={this.state.sortByPrice} defaultValue="Ceny" type="button" className="btn btn-warning"></input>
+            <input onClick={() => this.setSortByDate()} value={this.state.sortByDate} defaultValue="Daty dodania" type="button" className="btn btn-warning"></input>
           </div>
         </div>
 

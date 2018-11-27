@@ -1,16 +1,13 @@
 const path = require('path');
 const webpack = require('webpack');
 
-//const ExtractTextPlugin = require('extract-text-webpack-plugin');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
-const ElectronPackager = require("webpack-electron-packager");
-//var InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const SRC_DIR = path.resolve(__dirname, 'src');
 const DIST_DIR = path.resolve(__dirname, 'dist');
 const PUBLIC_DIR = path.resolve(__dirname, 'public');
 
-module.exports = {
+webpackConfig = {
     mode: "development",
     devtool: "inline-source-map",
     entry: `${SRC_DIR}/index.tsx`,
@@ -35,23 +32,11 @@ module.exports = {
         new HtmlWebpackPlugin({
             inject: true,
             template: path.resolve('public/index.html'),
-        }),
-        new ElectronPackager({
-            dir: ".",
-            arch: "ia32",
-            platform: "win32",
-            out: "release-builds",
-            overwrite: true
-         })
-          
-        //new InterpolateHtmlPlugin({
-        //    PUBLIC_URL: PUBLIC_DIR
-        //})
-        //new ExtractTextPlugin({ filename: 'styles.css', allChunks: true })
+        })
     ],
     devServer: {
         contentBase: [DIST_DIR, SRC_DIR, PUBLIC_DIR],
-        port: 8080,
+        port: 80,
         compress: true,
         publicPath: '/',
         historyApiFallback: true,
@@ -89,5 +74,16 @@ module.exports = {
 if (process.env.NODE_ENV === 'staging' || process.env.NODE_ENV === 'production') {
     config.entry = `${SRC_DIR}/index.tsx`;
     config.devtool = false;
-    config.plugins = [];
+
+    const ElectronPackager = require("webpack-electron-packager");
+  
+    webpackConfig.plugins.push(new ElectronPackager({
+        dir: ".",
+        arch: "ia32",
+        platform: "win32",
+        out: "release-builds",
+        overwrite: true
+    }));
 }
+
+module.exports = webpackConfig;
