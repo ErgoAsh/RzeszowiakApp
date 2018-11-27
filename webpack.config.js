@@ -3,6 +3,7 @@ const webpack = require('webpack');
 
 //const ExtractTextPlugin = require('extract-text-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
+const ElectronPackager = require("webpack-electron-packager");
 //var InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
 
 const SRC_DIR = path.resolve(__dirname, 'src');
@@ -34,7 +35,15 @@ module.exports = {
         new HtmlWebpackPlugin({
             inject: true,
             template: path.resolve('public/index.html'),
-          }),
+        }),
+        new ElectronPackager({
+            dir: ".",
+            arch: "ia32",
+            platform: "win32",
+            out: "release-builds",
+            overwrite: true
+         })
+          
         //new InterpolateHtmlPlugin({
         //    PUBLIC_URL: PUBLIC_DIR
         //})
@@ -42,7 +51,7 @@ module.exports = {
     ],
     devServer: {
         contentBase: [DIST_DIR, SRC_DIR, PUBLIC_DIR],
-        port: 3000,
+        port: 8080,
         compress: true,
         publicPath: '/',
         historyApiFallback: true,
