@@ -6,4 +6,11 @@ export default class Auction {
     date : string;
     prize : number;
     description : string;
+    type: AuctionType
+}
+
+export enum AuctionType {
+    Promo,
+    Special,
+    Normal
 }

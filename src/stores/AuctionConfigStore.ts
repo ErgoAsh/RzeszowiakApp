@@ -11,7 +11,7 @@ class AuctionConfigStore {
         minPrize: undefined, 
         maxPrize: undefined, 
         time: TimeQuery.Days_30, 
-        sortBy: SortStyle.Prize_DESC
+        sortBy: SortStyle.Date_ASC
     };
 
     @action
