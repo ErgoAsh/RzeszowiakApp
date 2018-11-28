@@ -103,7 +103,7 @@ class SideBar extends React.Component<{ auctionStore?: AuctionStore, auctionConf
 
   resetPage() {
     this.props.auctionConfigStore!.setPage(1);
-    this.props.auctionStore!.downloadAuctions();
+    this.props.auctionStore!.downloadAuctions(true);
   }
 
   state = {

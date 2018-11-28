@@ -26,8 +26,11 @@ class AuctionStore {
     }
 
     @action
-    downloadAuctions() {
+    downloadAuctions(reload: boolean) {
         this.isLoading = true;
+        if (reload) {
+            this.auctions = [];
+        }
         this.downloadService.process(this.linkService.getLinkByOptions(this.config), (result, hasMore) => {
             if (this.config.page == 1) {
                 this.auctions = result;
@@ -41,7 +44,7 @@ class AuctionStore {
 
     @action
     downloadMore() { 
-        this.downloadAuctions();
+        this.downloadAuctions(false);
         this.configStore.nextPage();
     }
 }

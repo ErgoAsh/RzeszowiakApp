@@ -36,12 +36,11 @@ class DownloadAuctionsService {
 
         $(data).find("div.promobox,div.normalbox").each(function() {
             let type: AuctionType;
+
             if ($(this).find("div.promobox-top").length != 0) type = AuctionType.Promo;
             else if ($(this).find("div.specjalnebox-top").length != 0) type = AuctionType.Special;
             else if ($(this).find("div.normalbox-top").length != 0) type = AuctionType.Normal;
             else throw "Not found a type";
-
-            console.log(type.toString());
 
             let title = $(this).find("div.promobox-title-left a,div.normalbox-title-left a");
             let date = $(this).find("p.promobox-more span b,p.normalbox-more span b").text();
@@ -64,8 +63,27 @@ class DownloadAuctionsService {
     }
 
     hasNextPage(data: JQuery.Node[]): boolean {
-        return $(data).find("div#oDnno span").last().hasClass("oDnnsk");
+        let index = $(data).find("div#oDnno").find("span.oDna").index();
+        console.log(index);
+        let item = $(data).children().eq(index + 1);
+        console.log(item);
+        if (item != null && item.hasClass("oDnn")) 
+            return true;
+        
+        return false;
     }
 }
+
+/* function() {
+            if (!found) {
+                console.log($(this));
+                if ($(this).hasClass("oDna"))
+                    found = true;
+            } else {
+                console.log("found");
+                if ($(this).hasClass("oDnn")) 
+                    result = true;
+            }
+        } */
 
 export default DownloadAuctionsService;
