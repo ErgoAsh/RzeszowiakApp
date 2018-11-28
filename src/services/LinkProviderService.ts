@@ -7,7 +7,6 @@ class LinkProviderService {
         let base = "http://www.rzeszowiak.pl/Nieruchomosci-Sprzedam-307"; //Last 3 numbers are pages
 
         base += page.toLocaleString('en-US', {minimumIntegerDigits: 3, useGrouping: false}); //3 next numbers has to be in "001" format
-        console.log(sortBy.valueOf());
         base += sortBy.valueOf() + 1; //Sorting style
         base += "10" //Amount of results per page
         base += time.valueOf() + 1; //Time constraint

@@ -63,27 +63,19 @@ class DownloadAuctionsService {
     }
 
     hasNextPage(data: JQuery.Node[]): boolean {
-        let index = $(data).find("div#oDnno").find("span.oDna").index();
-        console.log(index);
-        let item = $(data).children().eq(index + 1);
-        console.log(item);
-        if (item != null && item.hasClass("oDnn")) 
-            return true;
+        let amount = $(data).find("div#oDnno").children().length;
+
+        let last = $(data).find("div#oDnno").children().eq(amount - 1);
+        let beforeLast = $(data).find("div#oDnno").children().eq(amount - 2);
         
-        return false;
+        console.log(last);
+        console.log(beforeLast);
+        console.log(!beforeLast.hasClass("oDna") || last.hasClass("oDnnsk"));
+        if (!beforeLast.hasClass("oDna") || last.hasClass("oDnnsk")) 
+            return true;
+        else
+            return false;
     }
 }
-
-/* function() {
-            if (!found) {
-                console.log($(this));
-                if ($(this).hasClass("oDna"))
-                    found = true;
-            } else {
-                console.log("found");
-                if ($(this).hasClass("oDnn")) 
-                    result = true;
-            }
-        } */
 
 export default DownloadAuctionsService;

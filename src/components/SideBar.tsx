@@ -70,8 +70,8 @@ class SideBar extends React.Component<{ auctionStore?: AuctionStore, auctionConf
     this.resetPage();
   }
 
-  handleMouseEnter(t: number){
-    this.props.auctionConfigStore!.setTime(t);
+  handleMouseEnter(time: number){
+    this.props.auctionConfigStore!.setTime(time);
     this.resetPage();
   }
 
