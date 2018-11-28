@@ -46,8 +46,10 @@ class AuctionStore {
 
     @action
     downloadMore() { 
-        this.downloadAuctions(false);
-        this.configStore.nextPage();
+        if (this.hasMore) {
+            this.downloadAuctions(false);
+            this.configStore.nextPage();
+        }
     }
 }
 
