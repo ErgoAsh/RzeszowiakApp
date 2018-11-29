@@ -10,7 +10,7 @@ const PUBLIC_DIR = path.resolve(__dirname, 'public');
 
 webpackConfig = {
     mode: "production",
-    devtool: "inline-source-map",
+    devtool: false, //"inline-source-map"
     entry: `${SRC_DIR}/index.tsx`,
     output: {
         filename: "bundle.js",

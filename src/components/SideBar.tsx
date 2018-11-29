@@ -135,7 +135,7 @@ class SideBar extends React.Component<{ auctionStore?: AuctionStore, auctionConf
     return (
       <div className="sidenav col-md-3">
         <div className="container">
-          <p className="text-center"><img src="/./images/rzeszow-logo.png" /></p>
+          <p className="text-center"><img src="./images/rzeszow-logo.png" /></p>
           <h1 className="col-md-12 text-md-center">Kategoria</h1>
 
             <div className="container-fluid col-md-12 type">

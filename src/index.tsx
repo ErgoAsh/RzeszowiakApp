@@ -3,7 +3,6 @@ import * as ReactDOM from 'react-dom';
 
 import { Provider } from 'mobx-react';
 import App from './components/App';
-import register from './RegisterServiceWorker';
 import AuctionStore from './stores/AuctionStore';
 import DownloadAuctionsService from './services/DownloadAuctionsService';
 import LinkProviderService from './services/LinkProviderService';
@@ -30,5 +29,5 @@ ReactDOM.render(
     </Provider>, 
 document.getElementById("root"));
 
-register();
+//register();
 
