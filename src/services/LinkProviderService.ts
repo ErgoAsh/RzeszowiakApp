@@ -11,9 +11,12 @@ class LinkProviderService {
         base += "10" //Amount of results per page
         base += time.valueOf() + 1; //Time constraint
 
+        let query = escape(searchQuery? searchQuery : "");
+
         base += "?r=" + category.valueOf();
         if (minPrize != undefined && minPrize != 0) base += "&min=" + minPrize;
         if (maxPrize != undefined && minPrize != 0) base += "&max=" + maxPrize;
+        if (query != null && query != "" && query.length > 0) base += "&z=" + query;
 
         console.log(base);
         return new URL(base);

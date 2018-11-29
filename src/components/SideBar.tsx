@@ -1,11 +1,12 @@
 import * as React from 'react';
+import * as Rx from "rxjs";
 import { SearchCategory, SortStyle, TimeQuery } from '../services/LinkProviderService';
 import { observer, inject } from 'mobx-react';
 import { computed } from 'mobx';
-import '../css/App.css';
 import AuctionStore from 'src/stores/AuctionStore';
 import AuctionConfigStore from 'src/stores/AuctionConfigStore';
 import '../effects/Dropdown';
+import '../css/App.css';
 
 interface ISideBarState {
   query: string,
@@ -18,6 +19,16 @@ interface ISideBarState {
 @inject("auctionConfigStore", "auctionStore")
 @observer
 class SideBar extends React.Component<{ auctionStore?: AuctionStore, auctionConfigStore?: AuctionConfigStore}, ISideBarState> {
+
+  input: Rx.Subject<React.ChangeEvent<HTMLInputElement>>;
+
+  constructor(props: any) {
+    super(props);
+
+    this.input = new Rx.Subject();
+    //this.input.pipe(audit(() => Rx.timer(300)));
+    this.input.subscribe((e: React.ChangeEvent<HTMLInputElement>) => this.processInput(e.target.value)) ;
+  }
 
   @computed get options() {
     return this.props.auctionConfigStore!.options;
@@ -65,12 +76,18 @@ class SideBar extends React.Component<{ auctionStore?: AuctionStore, auctionConf
   }
 
   handleQueryUpdate(e: React.ChangeEvent<HTMLInputElement>) {
-    this.setState({query: e.currentTarget.value});
-    this.props.auctionConfigStore!.setQuery(e.currentTarget.value);
+    e.persist();
+    this.input.next(e);
+  }
+
+  processInput(input: string) {
+    this.setState({query: input});
+    this.props.auctionConfigStore!.setQuery(input);
     this.resetPage();
   }
 
-  handleMouseEnter(time: number){
+  handleDropdownSelect(time: number){
+    console.log("OnClick");
     this.props.auctionConfigStore!.setTime(time);
     this.resetPage();
   }
@@ -159,11 +176,11 @@ class SideBar extends React.Component<{ auctionStore?: AuctionStore, auctionConf
            <input type="hidden" name="hidden-value" required />
              <div className="dropdown__list" >
               <ul >
-                <li data-value="24" onClick={() => this.handleMouseEnter(TimeQuery.Hours_24)} >24 Godzin</li>
-                <li data-value="3" onClick={() => this.handleMouseEnter(TimeQuery.Days_3)} >3 Dni</li>
-                <li data-value="7" onClick={() => this.handleMouseEnter(TimeQuery.Days_7)} >7 Dni</li>
-                <li data-value="14" onClick={() => this.handleMouseEnter(TimeQuery.Days_14)} >14 Dni</li>
-                <li data-value="30" onClick={() => this.handleMouseEnter(TimeQuery.Days_30)} >30 Dni</li>
+                <li data-value="24" onClick={() => this.handleDropdownSelect(TimeQuery.Hours_24)}>24 Godzin</li>
+                <li data-value="3" onClick={() => this.handleDropdownSelect(TimeQuery.Days_3)}>3 Dni</li>
+                <li data-value="7" onClick={() => this.handleDropdownSelect(TimeQuery.Days_7)}>7 Dni</li>
+                <li data-value="14" onClick={() => this.handleDropdownSelect(TimeQuery.Days_14)}>14 Dni</li>
+                <li data-value="30" onClick={() => this.handleDropdownSelect(TimeQuery.Days_30)}>30 Dni</li>
               </ul>
              </div>
           </div>

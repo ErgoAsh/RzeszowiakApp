@@ -64,13 +64,9 @@ class DownloadAuctionsService {
 
     hasNextPage(data: JQuery.Node[]): boolean {
         let amount = $(data).find("div#oDnno").children().length;
-
         let last = $(data).find("div#oDnno").children().eq(amount - 1);
         let beforeLast = $(data).find("div#oDnno").children().eq(amount - 2);
         
-        console.log(last);
-        console.log(beforeLast);
-        console.log(!beforeLast.hasClass("oDna") || last.hasClass("oDnnsk"));
         if (!beforeLast.hasClass("oDna") || last.hasClass("oDnnsk")) 
             return true;
         else

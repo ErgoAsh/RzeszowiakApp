@@ -41,7 +41,7 @@ class AuctionListItem extends React.Component<AuctionItemProps, any> {
               <p>Cena: {this.props.value.prize} zł</p>   
             </div>
             <div className="ItemDescription col-md-8"><br />
-              <p> {this.props.value.description} </p>   
+              <p>{this.props.value.description}</p>   
             </div>
         </div>
       </div>

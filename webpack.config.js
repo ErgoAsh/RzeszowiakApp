@@ -2,6 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ElectronPackager = require("webpack-electron-packager");
 
 const SRC_DIR = path.resolve(__dirname, 'src');
 const DIST_DIR = path.resolve(__dirname, 'dist');
@@ -32,6 +33,13 @@ webpackConfig = {
         new HtmlWebpackPlugin({
             inject: true,
             template: path.resolve('public/index.html'),
+        }),
+        new ElectronPackager({
+            dir: ".",
+            arch: "ia32",
+            platform: "win32",
+            out: "release-builds",
+            overwrite: true
         })
     ],
     devServer: {
@@ -74,8 +82,6 @@ webpackConfig = {
 if (process.env.NODE_ENV === 'staging' || process.env.NODE_ENV === 'production') {
     //config.entry = `${SRC_DIR}/index.tsx`;
     config.devtool = false;
-
-    const ElectronPackager = require("webpack-electron-packager");
   
     webpackConfig.plugins.push(new ElectronPackager({
         dir: ".",
