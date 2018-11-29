@@ -26,23 +26,30 @@ class AuctionStore {
     }
 
     @action
-    downloadAuctions() {
-        this.isLoading = true;
-        this.downloadService.process(this.linkService.getLinkByOptions(this.config), (result, hasMore) => {
-            if (this.config.page == 1) {
-                this.auctions = result;
-            } else {
-                this.auctions = this.auctions.concat(result);
+    downloadAuctions(reload: boolean) {
+        if (!this.isLoading) {
+            this.isLoading = true;
+            if (reload) {
+                this.auctions = [];
             }
-            this.isLoading = false;
-            this.hasMore = hasMore;
-        });
+            this.downloadService.process(this.linkService.getLinkByOptions(this.config), (result, hasMore) => {
+                if (this.config.page == 1) {
+                    this.auctions = result;
+                } else {
+                    this.auctions = this.auctions.concat(result);
+                }
+                this.isLoading = false;
+                this.hasMore = hasMore;
+            });
+        }
     }
 
     @action
     downloadMore() { 
-        this.downloadAuctions();
-        this.configStore.nextPage();
+        if (this.hasMore) {
+            this.downloadAuctions(false);
+            this.configStore.nextPage();
+        }
     }
 }
 

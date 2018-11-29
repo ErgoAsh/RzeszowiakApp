@@ -52,7 +52,7 @@
   },
   "scripts": {
     "electron": "electron .",
-    "magic": "webpack --mode production",
+    "build": "webpack --mode production --define process.env.NODE_ENV='production'",
     "start": "webpack-dev-server --mode development"
   },
   "eslintConfig": {

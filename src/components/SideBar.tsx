@@ -33,13 +33,13 @@ class SideBar extends React.Component<{ auctionStore?: AuctionStore, auctionConf
     {
       this.props.auctionConfigStore!.setOrder(SortStyle.Date_DESC);
       this.setState({
-        sortByDate: "Daty dodania &darr;",
+        sortByDate: "Daty dodania ↓",
         sortByPrice: "Ceny"
       });
     } else {
       this.props.auctionConfigStore!.setOrder(SortStyle.Date_ASC);
       this.setState({
-        sortByDate: "Daty dodania &uarr;",
+        sortByDate: "Daty dodania ↑",
         sortByPrice: "Ceny"
       });
     }
@@ -52,13 +52,13 @@ class SideBar extends React.Component<{ auctionStore?: AuctionStore, auctionConf
       this.props.auctionConfigStore!.setOrder(SortStyle.Prize_DESC);
       this.setState({
         sortByDate: "Daty dodania",
-        sortByPrice: "Ceny &darr;"
+        sortByPrice: "Ceny ↓"
       });
     } else {
       this.props.auctionConfigStore!.setOrder(SortStyle.Prize_ASC);
       this.setState({
         sortByDate: "Daty dodania",
-        sortByPrice: "Ceny &uarr;"
+        sortByPrice: "Ceny ↑"
       });
     }
     this.resetPage();
@@ -70,8 +70,8 @@ class SideBar extends React.Component<{ auctionStore?: AuctionStore, auctionConf
     this.resetPage();
   }
 
-  handleMouseEnter(t: number){
-    this.props.auctionConfigStore!.setTime(t);
+  handleMouseEnter(time: number){
+    this.props.auctionConfigStore!.setTime(time);
     this.resetPage();
   }
 
@@ -103,13 +103,13 @@ class SideBar extends React.Component<{ auctionStore?: AuctionStore, auctionConf
 
   resetPage() {
     this.props.auctionConfigStore!.setPage(1);
-    this.props.auctionStore!.downloadAuctions();
+    this.props.auctionStore!.downloadAuctions(true);
   }
 
   state = {
     query: "",
-    sortByDate: "Ceny",
-    sortByPrice: "Daty dodania",
+    sortByDate: "Daty dodania ↑",
+    sortByPrice: "Ceny",
     min: undefined,
     max: undefined
   }
@@ -172,8 +172,8 @@ class SideBar extends React.Component<{ auctionStore?: AuctionStore, auctionConf
         <div className="container text-center sorting">
           <div className="btn-group-lg text-center pagination-centered">
             <p className="h2">Sortuj według</p>
-            <input onClick={() => this.setSortByPrice()} value={this.state.sortByPrice} defaultValue="Ceny" type="button" className="btn btn-warning"></input>
-            <input onClick={() => this.setSortByDate()} value={this.state.sortByDate} defaultValue="Daty dodania" type="button" className="btn btn-warning"></input>
+            <input onClick={() => this.setSortByPrice()} value={this.state.sortByPrice} type="button" className="btn btn-warning"></input>
+            <input onClick={() => this.setSortByDate()} value={this.state.sortByDate} type="button" className="btn btn-warning"></input>
           </div>
         </div>
 

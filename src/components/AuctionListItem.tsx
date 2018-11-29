@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Auction from '../models/Auction';
+import Auction, { AuctionType } from '../models/Auction';
 
 declare global {
   interface Window {
@@ -16,14 +16,25 @@ class AuctionListItem extends React.Component<AuctionItemProps, any> {
 
   onClick(e: React.MouseEvent<HTMLDivElement>) {
     if (this.props.value.link != null) {
-        //e.preventDefault();
         window.require("electron").shell.openExternal(this.props.value.link.toString());
     }
   }
 
   render() {
+
+    let className = "Item";
+    switch (this.props.value.type) {
+      case AuctionType.Promo:
+        className += " Item_promotion"; 
+        break;
+      case AuctionType.Special:
+        className += " Item_special";
+        break;
+      default: break;
+    }
+
     return (
-      <div className="Item">
+      <div className={className}>
         <div onClick={(e) => this.onClick(e)} className="container-fluid">
             <div className="ItemInfo col-md-4">
               <p>{this.props.value.title}</p>
