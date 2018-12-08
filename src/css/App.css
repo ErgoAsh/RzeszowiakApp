@@ -18,8 +18,8 @@
   padding-left: 10px;
 }
 .sidenav img{
-  width: 15rem;
-  height: 15rem;
+  width: 12rem;
+  height: 12rem;
 }
 @media only screen and (max-width: 992px){
   .sidenav{
@@ -106,7 +106,7 @@ h3 {
   */
 }
 
-input
+fieldset input
 {
   border: #f0ad4e 2px solid !important;  
   background-color: #244C8A !important;
@@ -403,7 +403,7 @@ h2:last-of-type{
   height: 42px;
   padding: 0 15px;
   font-size: 1.3vw !important;
-  color: #FFFFFF !important;
+  color: #244C8A !important;
   border-radius: 8px;
   border: 1px solid #e7eaef;
   cursor: pointer;

@@ -1,21 +1,34 @@
 import * as React from 'react';
-import { SearchCategory } from '../services/LinkProviderService';
+import * as Rx from "rxjs";
+import { SearchCategory, SortStyle, TimeQuery } from '../services/LinkProviderService';
 import { observer, inject } from 'mobx-react';
 import { computed } from 'mobx';
-import '../css/App.css';
 import AuctionStore from 'src/stores/AuctionStore';
 import AuctionConfigStore from 'src/stores/AuctionConfigStore';
 import '../effects/Dropdown';
+import '../css/App.css';
 
 interface ISideBarState {
   query: string,
   min: number | undefined,
-  max: number | undefined
+  max: number | undefined,
+  sortByDate: string,
+  sortByPrice: string
 }
 
 @inject("auctionConfigStore", "auctionStore")
 @observer
 class SideBar extends React.Component<{ auctionStore?: AuctionStore, auctionConfigStore?: AuctionConfigStore}, ISideBarState> {
+
+  input: Rx.Subject<React.ChangeEvent<HTMLInputElement>>;
+
+  constructor(props: any) {
+    super(props);
+
+    this.input = new Rx.Subject();
+    //this.input.pipe(audit(() => Rx.timer(300)));
+    this.input.subscribe((e: React.ChangeEvent<HTMLInputElement>) => this.processInput(e.target.value)) ;
+  }
 
   @computed get options() {
     return this.props.auctionConfigStore!.options;
@@ -26,9 +39,56 @@ class SideBar extends React.Component<{ auctionStore?: AuctionStore, auctionConf
     this.resetPage();
   }
 
+  setSortByDate() {
+    if (this.props.auctionConfigStore!.options.sortBy == SortStyle.Date_ASC)
+    {
+      this.props.auctionConfigStore!.setOrder(SortStyle.Date_DESC);
+      this.setState({
+        sortByDate: "Daty dodania ↓",
+        sortByPrice: "Ceny"
+      });
+    } else {
+      this.props.auctionConfigStore!.setOrder(SortStyle.Date_ASC);
+      this.setState({
+        sortByDate: "Daty dodania ↑",
+        sortByPrice: "Ceny"
+      });
+    }
+    this.resetPage();
+  }
+
+  setSortByPrice(){
+    if (this.props.auctionConfigStore!.options.sortBy == SortStyle.Prize_ASC)
+    {
+      this.props.auctionConfigStore!.setOrder(SortStyle.Prize_DESC);
+      this.setState({
+        sortByDate: "Daty dodania",
+        sortByPrice: "Ceny ↓"
+      });
+    } else {
+      this.props.auctionConfigStore!.setOrder(SortStyle.Prize_ASC);
+      this.setState({
+        sortByDate: "Daty dodania",
+        sortByPrice: "Ceny ↑"
+      });
+    }
+    this.resetPage();
+  }
+
   handleQueryUpdate(e: React.ChangeEvent<HTMLInputElement>) {
-    this.setState({query: e.currentTarget.value});
-    this.props.auctionConfigStore!.setQuery(e.currentTarget.value);
+    e.persist();
+    this.input.next(e);
+  }
+
+  processInput(input: string) {
+    this.setState({query: input});
+    this.props.auctionConfigStore!.setQuery(input);
+    this.resetPage();
+  }
+
+  handleDropdownSelect(time: number){
+    console.log("OnClick");
+    this.props.auctionConfigStore!.setTime(time);
     this.resetPage();
   }
 
@@ -60,11 +120,13 @@ class SideBar extends React.Component<{ auctionStore?: AuctionStore, auctionConf
 
   resetPage() {
     this.props.auctionConfigStore!.setPage(1);
-    this.props.auctionStore!.downloadAuctions();
+    this.props.auctionStore!.downloadAuctions(true);
   }
 
   state = {
     query: "",
+    sortByDate: "Daty dodania ↑",
+    sortByPrice: "Ceny",
     min: undefined,
     max: undefined
   }
@@ -73,7 +135,7 @@ class SideBar extends React.Component<{ auctionStore?: AuctionStore, auctionConf
     return (
       <div className="sidenav col-md-3">
         <div className="container">
-          <p className="text-center"><img src="/./images/rzeszow-logo.png" /></p>
+          <p className="text-center"><img src="./images/rzeszow-logo.png" /></p>
           <h1 className="col-md-12 text-md-center">Kategoria</h1>
 
             <div className="container-fluid col-md-12 type">
@@ -110,16 +172,15 @@ class SideBar extends React.Component<{ auctionStore?: AuctionStore, auctionConf
         
         <div className="container">
          <div className="dropdown">
-           <input type="text" name="seen-value" placeholder="Ogłoszenia z ostatnich" required />
+           <input type="text" name="seen-value" placeholder="Ogłoszenia z" required data-value="24" />
            <input type="hidden" name="hidden-value" required />
-             <div className="dropdown__list">
-              <ul>
-                <li data-value=""></li>
-                <li data-value="24">24 Godzin</li>
-                <li data-value="3">3 Dni</li>
-                <li data-value="7">7 Dni</li>
-                <li data-value="14">14 Dni</li>
-                <li data-value="30">30 Dni</li>
+             <div className="dropdown__list" >
+              <ul >
+                <li data-value="24" onClick={() => this.handleDropdownSelect(TimeQuery.Hours_24)}>24 Godzin</li>
+                <li data-value="3" onClick={() => this.handleDropdownSelect(TimeQuery.Days_3)}>3 Dni</li>
+                <li data-value="7" onClick={() => this.handleDropdownSelect(TimeQuery.Days_7)}>7 Dni</li>
+                <li data-value="14" onClick={() => this.handleDropdownSelect(TimeQuery.Days_14)}>14 Dni</li>
+                <li data-value="30" onClick={() => this.handleDropdownSelect(TimeQuery.Days_30)}>30 Dni</li>
               </ul>
              </div>
           </div>
@@ -128,8 +189,8 @@ class SideBar extends React.Component<{ auctionStore?: AuctionStore, auctionConf
         <div className="container text-center sorting">
           <div className="btn-group-lg text-center pagination-centered">
             <p className="h2">Sortuj według</p>
-            <button type="button" className="btn btn-warning">Ceny</button>
-            <button type="button" className="btn btn-warning">Daty dodania</button>
+            <input onClick={() => this.setSortByPrice()} value={this.state.sortByPrice} type="button" className="btn btn-warning"></input>
+            <input onClick={() => this.setSortByDate()} value={this.state.sortByDate} type="button" className="btn btn-warning"></input>
           </div>
         </div>
 

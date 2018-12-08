@@ -1,4 +1,4 @@
-import Auction from '../models/Auction';
+import Auction, { AuctionType } from '../models/Auction';
 import * as $ from "jquery";
 
 class DownloadAuctionsService {
@@ -35,6 +35,13 @@ class DownloadAuctionsService {
         let items: Auction[] = [];
 
         $(data).find("div.promobox,div.normalbox").each(function() {
+            let type: AuctionType;
+
+            if ($(this).find("div.promobox-top").length != 0) type = AuctionType.Promo;
+            else if ($(this).find("div.specjalnebox-top").length != 0) type = AuctionType.Special;
+            else if ($(this).find("div.normalbox-top").length != 0) type = AuctionType.Normal;
+            else throw "Not found a type";
+
             let title = $(this).find("div.promobox-title-left a,div.normalbox-title-left a");
             let date = $(this).find("p.promobox-more span b,p.normalbox-more span b").text();
             let prize = $(this).find("div.promobox-title-left2,div.normalbox-title-left2").text();
@@ -47,7 +54,8 @@ class DownloadAuctionsService {
                 image_src: image? "http://rzeszowiak.pl" + image.attr("src") : "",
                 date : date,
                 prize : prize? Number(prize.split(' ')[1]) : 0,
-                description : desc
+                description : desc,
+                type: type
             });
         });
        
@@ -55,7 +63,14 @@ class DownloadAuctionsService {
     }
 
     hasNextPage(data: JQuery.Node[]): boolean {
-        return $(data).find("div#oDnno span").last().hasClass("oDnnsk");
+        let amount = $(data).find("div#oDnno").children().length;
+        let last = $(data).find("div#oDnno").children().eq(amount - 1);
+        let beforeLast = $(data).find("div#oDnno").children().eq(amount - 2);
+        
+        if (!beforeLast.hasClass("oDna") || last.hasClass("oDnnsk")) 
+            return true;
+        else
+            return false;
     }
 }
 
