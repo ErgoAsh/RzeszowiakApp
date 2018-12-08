@@ -22,7 +22,7 @@ class DownloadAuctionsService {
             method: "GET",
             crossDomain: true,
             contentType: 'Content-type: text/plain; charset=iso-8859-2',
-            error: () => console.log("HTML file has been incorrectly downloaded!"),
+            error: (error) => console.log("HTML file has been incorrectly downloaded!\n" + error.responseText),
             beforeSend: (request) =>
                 request.overrideMimeType('text/html;charset=iso-8859-2'),
             success: (result) => {

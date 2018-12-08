@@ -1,7 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
 
-var HtmlWebpackPlugin = require('html-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const SRC_DIR = path.resolve(__dirname, 'src');
@@ -75,7 +74,7 @@ webpackConfig = {
 if (process.env.NODE_ENV === 'staging' || process.env.NODE_ENV === 'production') {
     //config.entry = `${SRC_DIR}/index.tsx`;
     config.devtool = false;
-    
+
     const ElectronPackager = require("webpack-electron-packager");
     webpackConfig.plugins.push(new ElectronPackager({
         dir: ".",

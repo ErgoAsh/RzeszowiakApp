@@ -4,3 +4,4 @@ platforms/
 plugins/
 dist/
 package-lock.json
+www/bundle.js
