@@ -3,12 +3,12 @@ const webpack = require('webpack');
 
 //const ExtractTextPlugin = require('extract-text-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
-var CordovaPlugin = require('webpack-cordova-plugin');
+//var CordovaPlugin = require('webpack-cordova-plugin');
 //var InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
 
 const SRC_DIR = path.resolve(__dirname, 'src');
+const WWW_DIR = path.resolve(__dirname, 'www');
 const DIST_DIR = path.resolve(__dirname, 'dist');
-const PUBLIC_DIR = path.resolve(__dirname, 'public');
 
 module.exports = {
     mode: "development",
@@ -16,7 +16,7 @@ module.exports = {
     entry: `${SRC_DIR}/index.tsx`,
     output: {
         filename: "bundle.js",
-        path: DIST_DIR,
+        path: WWW_DIR,
     },
     resolve: {
         extensions: [".ts", ".tsx", ".js", ".css", ".json"]
@@ -34,14 +34,15 @@ module.exports = {
         new webpack.NamedModulesPlugin(),
         new HtmlWebpackPlugin({
             inject: true,
-            template: path.resolve('public/index.html'),
-        }),
+            template: path.resolve('www/index.html'),
+        })/*,
+
         new CordovaPlugin({
             config: 'config.xml',  // Location of Cordova' config.xml (will be created if not found)
             src: 'index.html',     // Set entry-point of cordova in config.xml
             platform: 'android',   // Set `webpack-dev-server` to correct `contentBase` to use Cordova plugins.
             version: true,         // Set config.xml' version. (true = use version from package.json)
-        })
+        })*/
         
         //new InterpolateHtmlPlugin({
         //    PUBLIC_URL: PUBLIC_DIR
@@ -49,7 +50,7 @@ module.exports = {
         //new ExtractTextPlugin({ filename: 'styles.css', allChunks: true })
     ],
     devServer: {
-        contentBase: [DIST_DIR, SRC_DIR, PUBLIC_DIR],
+        contentBase: [DIST_DIR, SRC_DIR, WWW_DIR],
         port: 3000,
         compress: true,
         publicPath: '/',

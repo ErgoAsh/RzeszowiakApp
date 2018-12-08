@@ -22,7 +22,7 @@ const inject = {
     auctionConfigStore,
     auctionStore
 };
-
+console.log("aaaa");
 ReactDOM.render(
     <Provider {...inject}>
         <App />

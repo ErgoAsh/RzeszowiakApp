@@ -7,6 +7,9 @@
     "files": {}
   },
   "installed_plugins": {
+    "cordova-plugin-webpack": {
+      "PACKAGE_NAME": "Rzeszowiak App"
+    },
     "cordova-plugin-whitelist": {
       "PACKAGE_NAME": "Rzeszowiak App"
     }
